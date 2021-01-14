@@ -14,6 +14,11 @@ Center(
         accesToken:"xyz", // Your Page AccesToken
         pageId: "123567890", // Your PageId
         limit: 25,
+        fields: [
+            FbNewsFields.attachments,
+            FbNewsFields.fullPicture,
+            FbNewsFields.message,
+        ]
     ),
 ),
 ```
