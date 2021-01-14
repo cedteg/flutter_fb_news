@@ -11,7 +11,7 @@ import 'package:flutter_fb_news/flutter_fb_news.dart';
 
 Center(
     child: FbNews(
-        authToken:"xyz", // Your Page AccesToken
+        accesToken:"xyz", // Your Page AccesToken
         pageId: "123567890", // Your PageId
         limit: 25,
     ),

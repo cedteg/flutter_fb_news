@@ -32,9 +32,14 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: FbNews(
-          authToken: "xyz",
+          accesToken: "xzy",
           pageId: "123567890",
           limit: 25,
+          fields: [
+            FbNewsFields.attachments,
+            FbNewsFields.fullPicture,
+            FbNewsFields.message,
+          ],
         ),
       ),
     );

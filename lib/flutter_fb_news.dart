@@ -4,23 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_fb_news/fb_news_service.dart';
 import 'package:http/http.dart' as http;
 
-import 'widgets/fb_feed.dart';
+import 'widgets/fb_news_feed.dart';
 
 /// Facebook News Feed of a facebook page like (https://www.facebook.com/Lohne-Longhorns-253146702201895/)
 class FbNews extends StatefulWidget {
   /// [pageId] is required to identify the facebook page for example (253146702201895)
   final String pageId;
 
-  /// [authToken] ist requred to authoried to the facebook api
+  /// [accesToken] ist requred to authoried to the facebook api
   /// Docu to get the authToken (https://developers.facebook.com/docs/facebook-login/access-tokens#pagetokens)
-  final String authToken;
+  final String accesToken;
 
   /// Limits the number of items that are loaded
-  /// ## DEFAULT = 20
+  /// #### DEFAULT = 20
   final int limit;
 
   /// The [waiting] widget is displayed if the data is loading
-  /// ## DEFAULT
+  /// #### DEFAULT
   /// ```dart
   /// Column(
   ///   children: [
@@ -35,7 +35,7 @@ class FbNews extends StatefulWidget {
 
   /// The [noDataOrError] widget ist displayed if the response has no data or an error
   ///
-  /// ## DEFAULT
+  /// #### DEFAULT
   /// ```dart
   /// Card(
   ///   color: Colors.red,
@@ -54,13 +54,42 @@ class FbNews extends StatefulWidget {
   /// ```
   final Widget noDataOrError;
 
-  const FbNews({
+  /// #### Supported fields are
+  /// ```dart
+  /// [
+  ///   FbNewsFields.attachments,
+  ///   FbNewsFields.fullPicture,
+  ///   FbNewsFields.message,
+  /// ];
+  /// ```
+  ///
+  /// #### DEFAULT
+  /// ```dart
+  /// [
+  ///   FbNewsFields.attachments,
+  ///   FbNewsFields.fullPicture,
+  ///   FbNewsFields.message,
+  /// ];
+  /// ```
+  final List<FbNewsFieldName> fields;
+
+  /// Subtitle in the every feeditem
+  final String subtitle;
+
+  FbNews({
     @required this.pageId,
-    @required this.authToken,
-    this.limit,
+    @required this.accesToken,
+    this.limit = 20,
     this.waiting,
     this.noDataOrError,
-  });
+    this.subtitle = "von Facebook",
+    fields,
+  }) : fields = fields ??
+            [
+              FbNewsFields.attachments,
+              FbNewsFields.fullPicture,
+              FbNewsFields.message,
+            ];
   @override
   _FbNewsState createState() => _FbNewsState();
 }
@@ -71,8 +100,9 @@ class _FbNewsState extends State<FbNews> {
     return new FutureBuilder<http.Response>(
       future: FbNewsService().getFeed(
         pageId: widget.pageId,
-        token: widget.authToken,
-        limit: widget.limit ?? 20,
+        token: widget.accesToken,
+        limit: widget.limit,
+        fields: widget.fields,
       ),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
@@ -87,7 +117,11 @@ class _FbNewsState extends State<FbNews> {
                   ],
                 );
           default:
-            if (!snapshot.hasData || snapshot.hasError)
+            if (!snapshot.hasData ||
+                snapshot.hasError ||
+                snapshot.data.body.contains(
+                  "Exception",
+                ))
               return widget.noDataOrError ??
                   Card(
                     color: Colors.red,
@@ -95,7 +129,7 @@ class _FbNewsState extends State<FbNews> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          snapshot.error.toString(),
+                          snapshot.error ?? snapshot.data.body,
                           style: TextStyle(
                             color: Colors.white,
                           ),
@@ -105,12 +139,27 @@ class _FbNewsState extends State<FbNews> {
                   );
             else
               return SingleChildScrollView(
-                child: FacebookFeedNews(
+                child: FbNewsFeed(
                   feedResponse: snapshot.data.body,
+                  subtitle: widget.subtitle,
                 ),
               );
         }
       },
     );
   }
+}
+
+class FbNewsFields {
+  static final FbNewsFieldName attachments = FbNewsFieldName("attachments");
+  static final FbNewsFieldName fullPicture = FbNewsFieldName("full_picture");
+  static final FbNewsFieldName message = FbNewsFieldName("message");
+}
+
+class FbNewsFieldName {
+  final String name;
+
+  FbNewsFieldName(
+    this.name,
+  );
 }

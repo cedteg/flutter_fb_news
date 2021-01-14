@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class FbFullPicture extends StatelessWidget {
+class FbNewsFullPicture extends StatelessWidget {
   final Map<String, dynamic> feed;
-  const FbFullPicture({
+  const FbNewsFullPicture({
     @required this.feed,
   });
 
