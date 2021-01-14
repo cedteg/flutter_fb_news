@@ -18,4 +18,4 @@ Center(
 ),
 ```
 # Demo
-[![Demo](https://raw.githubusercontent.com/cedteg/flutter_fb_news/main/demo/flutter_fb_news-demo1.png)]
+![Demo](https://raw.githubusercontent.com/cedteg/flutter_fb_news/main/demo/flutter_fb_news-demo1.png)
