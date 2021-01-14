@@ -1,0 +1,20 @@
+name: flutter_fb_news
+description: A new Flutter package.
+version: 0.0.1
+author: cedteg
+homepage:
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  http: ^0.12.2
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
