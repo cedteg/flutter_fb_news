@@ -1,6 +1,8 @@
+## [0.0.3+1] - 2021.01.15
+* Update changelog
 ## [0.0.3] - 2021.01.15
-* rename `authToken` to `accesToken`
-* **BREAKING:** add `fields` to customize the feed
+* **BREAKING:** rename `authToken` to `accesToken`
+* add `fields` to customize the feed
 * refactor files
 * catch error in data body
 ## [0.0.2+1] - 2021.01.14

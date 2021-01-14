@@ -1,6 +1,6 @@
 name: flutter_fb_news
 description: A Package to display a facebook feed of a page
-version: 0.0.3
+version: 0.0.3+1
 homepage: https://github.com/cedteg/flutter_fb_news
 
 environment:
