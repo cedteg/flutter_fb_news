@@ -57,7 +57,7 @@ class _FbNewsAttachmentsState extends State<FbNewsAttachments> {
                     items: images
                         .map((i) {
                           return Image.network(
-                            i["media"]["image"]["src"],
+                            i["media"]["image"]["src"] ?? "",
                           );
                         })
                         .cast<Widget>()
@@ -67,7 +67,7 @@ class _FbNewsAttachmentsState extends State<FbNewsAttachments> {
                     children: images
                         .map((i) {
                           return Image.network(
-                            i["media"]["image"]["src"],
+                            i["media"]["image"]["src"] ?? "",
                           );
                         })
                         .cast<Widget>()
@@ -79,7 +79,7 @@ class _FbNewsAttachmentsState extends State<FbNewsAttachments> {
                 children: videos
                     .map((v) {
                       return FbNewsAttachmentsVideo(
-                        videourl: v["media"]["source"],
+                        videourl: v["media"]["source"] ?? "",
                       );
                     })
                     .cast<Widget>()

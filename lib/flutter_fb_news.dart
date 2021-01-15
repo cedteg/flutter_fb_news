@@ -1,5 +1,7 @@
 library flutter_fb_news;
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_fb_news/fb_news_service.dart';
 import 'package:http/http.dart' as http;
@@ -97,14 +99,12 @@ class _FbNewsState extends State<FbNews> {
   @override
   Widget build(BuildContext context) {
     return new FutureBuilder<http.Response>(
-      future: FbNewsService.getFeed(
+      future: FbNewsService.getProfilePicture(
         pageId: widget.pageId,
         token: widget.accesToken,
-        limit: widget.limit,
-        fields: widget.fields,
       ),
-      builder: (context, snapshot) {
-        switch (snapshot.connectionState) {
+      builder: (context, snapshot1) {
+        switch (snapshot1.connectionState) {
           case ConnectionState.waiting:
             return widget.waiting ??
                 Column(
@@ -116,9 +116,9 @@ class _FbNewsState extends State<FbNews> {
                   ],
                 );
           default:
-            if (!snapshot.hasData ||
-                snapshot.hasError ||
-                snapshot.data.body.contains(
+            if (!snapshot1.hasData ||
+                snapshot1.hasError ||
+                snapshot1.data.body.contains(
                   "Exception",
                 ))
               return widget.noDataOrError ??
@@ -128,7 +128,7 @@ class _FbNewsState extends State<FbNews> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          snapshot.error ?? snapshot.data.body,
+                          snapshot1.error ?? snapshot1.data.body,
                           style: TextStyle(
                             color: Colors.white,
                           ),
@@ -137,9 +137,57 @@ class _FbNewsState extends State<FbNews> {
                     ),
                   );
             else
-              return FbNewsFeed(
-                feedResponse: snapshot.data.body,
-                subtitle: widget.subtitle,
+              return new FutureBuilder<http.Response>(
+                future: FbNewsService.getFeed(
+                  pageId: widget.pageId,
+                  token: widget.accesToken,
+                  limit: widget.limit,
+                  fields: widget.fields,
+                ),
+                builder: (context, snapshot2) {
+                  switch (snapshot2.connectionState) {
+                    case ConnectionState.waiting:
+                      return widget.waiting ??
+                          Column(
+                            children: [
+                              CircularProgressIndicator(),
+                              SizedBox(
+                                height: 10,
+                              )
+                            ],
+                          );
+                    default:
+                      if (!snapshot2.hasData ||
+                          snapshot2.hasError ||
+                          snapshot2.data.body.contains(
+                            "Exception",
+                          ))
+                        return widget.noDataOrError ??
+                            Card(
+                              color: Colors.red,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    snapshot2.error ?? snapshot2.data.body,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            );
+                      else
+                        return FbNewsFeed(
+                          feedResponse: snapshot2.data.body,
+                          profilePictureUrl:
+                              jsonDecode(snapshot1.data.body)["picture"]["data"]
+                                      ["url"]
+                                  .toString(),
+                          subtitle: widget.subtitle,
+                        );
+                  }
+                },
               );
         }
       },

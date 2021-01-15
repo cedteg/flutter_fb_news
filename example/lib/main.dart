@@ -27,22 +27,20 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text("flutter_fb_news example"),
       ),
-      body: Column(
-        children: [
-          Center(
-            child: Scrollbar(
-              child: SingleChildScrollView(
-                child: FbNews(
-                  limit: 25,
-                  fields: [
-                    FbNewsFields.attachments,
-                    FbNewsFields.message,
-                  ],
-                ),
-              ),
+      body: Center(
+        child: Scrollbar(
+          child: SingleChildScrollView(
+            child: FbNews(
+              accesToken: "xyz",
+              pageId: "1234567890",
+              limit: 25,
+              fields: [
+                FbNewsFields.attachments,
+                FbNewsFields.message,
+              ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }

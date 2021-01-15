@@ -11,11 +11,13 @@ import 'fb_news_header.dart';
 class FbNewsFeed extends StatelessWidget {
   final String subtitle;
   final String feedResponse;
+  final String profilePictureUrl;
 
   @internal
   const FbNewsFeed({
     @required this.feedResponse,
     @required this.subtitle,
+    @required this.profilePictureUrl,
   });
   @override
   Widget build(BuildContext context) {
@@ -38,6 +40,7 @@ class FbNewsFeed extends StatelessWidget {
                         FbNewsHeader(
                           subtitle: subtitle,
                           feed: feed,
+                          profilePictureUrl: profilePictureUrl,
                         ),
                         FbNewsMessage(
                           feed: feed,

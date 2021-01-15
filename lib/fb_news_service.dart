@@ -13,4 +13,12 @@ class FbNewsService {
     return await http.get(
         "https://graph.facebook.com/v9.0/$pageId/feed?fields=id,created_time,likes{id},from,limit{$limit},shares,permalink_url,${f.join(",")}&access_token=$token");
   }
+
+  static Future<http.Response> getProfilePicture({
+    String pageId,
+    String token,
+  }) async {
+    return await http.get(
+        "https://graph.facebook.com/v9.0/$pageId?fields=picture&access_token=$token");
+  }
 }

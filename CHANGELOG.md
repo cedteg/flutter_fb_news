@@ -1,3 +1,5 @@
+## [0.0.5] - 2021.01.15
+* add profile picture to feeditem
 ## [0.0.4+1] - 2021.01.15
 * update description
 ## [0.0.4] - 2021.01.15
