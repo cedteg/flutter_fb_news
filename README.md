@@ -1,6 +1,6 @@
 # flutter_fb_news
 
-A Package to display a facebook feed of a page
+Flutter plugin for displaying Facebook page feed with photos and videos
 
 [![pub](https://img.shields.io/pub/v/flutter_fb_news.svg)](https://pub.dev/packages/flutter_fb_news)
 

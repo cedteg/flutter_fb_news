@@ -1,7 +1,12 @@
+## [0.0.4] - 2021.01.15
+* **BREAKING:** remove `fullPicture`
+* add `attachment` Support for photos and videos
+* mark internal widgets as interal
+* update Docu
 ## [0.0.3+2] - 2021.01.15
-* Update Readme
+* update Readme
 ## [0.0.3+1] - 2021.01.15
-* Update Changelog
+* update Changelog
 ## [0.0.3] - 2021.01.15
 * **BREAKING:** rename `authToken` to `accesToken`
 * add `fields` to customize the feed

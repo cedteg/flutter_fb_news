@@ -6,20 +6,22 @@ import 'package:http/http.dart' as http;
 
 import 'widgets/fb_news_feed.dart';
 
-/// Facebook News Feed of a facebook page like (https://www.facebook.com/Lohne-Longhorns-253146702201895/)
+/// Flutter plugin for displaying Facebook page feed with photos and videos
 class FbNews extends StatefulWidget {
-  /// [pageId] is required to identify the facebook page for example (253146702201895)
+  /// [pageId] is required to identify the Facebook page, for example (253146702201895)
   final String pageId;
 
-  /// [accesToken] ist requred to authoried to the facebook api
+  /// [accesToken] is required to authorize for the Facebook Api
   /// Docu to get the authToken (https://developers.facebook.com/docs/facebook-login/access-tokens#pagetokens)
   final String accesToken;
 
-  /// Limits the number of items that are loaded
+  /// Limits the number of elements that are loaded
+  ///
   /// #### DEFAULT = 20
   final int limit;
 
-  /// The [waiting] widget is displayed if the data is loading
+  /// The [waiting] widget is displayed when the data is loaded
+  ///
   /// #### DEFAULT
   /// ```dart
   /// Column(
@@ -33,7 +35,7 @@ class FbNews extends StatefulWidget {
   /// ```
   final Widget waiting;
 
-  /// The [noDataOrError] widget ist displayed if the response has no data or an error
+  /// The [noDataOrError] widget is displayed if the response contains no data or an error
   ///
   /// #### DEFAULT
   /// ```dart
