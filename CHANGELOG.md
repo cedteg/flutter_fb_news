@@ -1,6 +1,8 @@
+## [0.0.4+1] - 2021.01.15
+* update description
 ## [0.0.4] - 2021.01.15
 * **BREAKING:** remove `fullPicture`
-* add `attachment` Support for photos and videos
+* add `attachment` support for photos and videos
 * mark internal widgets as interal
 * update Docu
 ## [0.0.3+2] - 2021.01.15
