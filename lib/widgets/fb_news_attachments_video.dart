@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+import 'package:chewie/chewie.dart';
 import 'package:video_player/video_player.dart';
 
 class FbNewsAttachmentsVideo extends StatefulWidget {
@@ -15,49 +16,60 @@ class FbNewsAttachmentsVideo extends StatefulWidget {
 }
 
 class _FbNewsAttachmentsVideoState extends State<FbNewsAttachmentsVideo> {
-  VideoPlayerController _controller;
+  VideoPlayerController _videoPlayerController1;
+  ChewieController _chewieController;
   @override
   void initState() {
-    _controller = VideoPlayerController.network(
-      widget.videourl,
-    )..initialize().then((_) {
-        setState(() {});
-      });
     super.initState();
+    initPlayer();
+  }
+
+  Future<void> initPlayer() async {
+    _videoPlayerController1 = VideoPlayerController.network(
+      widget.videourl,
+    );
+    await _videoPlayerController1.initialize();
+    _chewieController = ChewieController(
+      videoPlayerController: _videoPlayerController1,
+      autoPlay: false,
+      looping: true,
+
+      // Try playing around with some of these other options:
+      allowFullScreen: false,
+      showControls: true,
+      customControls: MaterialControls(),
+      // materialProgressColors: ChewieProgressColors(
+      //   playedColor: Colors.red,
+      //   handleColor: Colors.blue,
+      //   backgroundColor: Colors.grey,
+      //   bufferedColor: Colors.lightGreen,
+      // ),
+      // placeholder: Container(
+      //   color: Colors.grey,
+      // ),
+      autoInitialize: true,
+    );
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: _controller.value.initialized
-          ? _controller.value.size.height + 10
-          : 50,
+    return Container(
       width: 460,
-      child: InkWell(
-        child: Stack(
-          children: [
-            VideoPlayer(
-              _controller,
+      height: 460,
+      child: _chewieController != null &&
+              _chewieController.videoPlayerController.value.initialized
+          ? Chewie(
+              controller: _chewieController,
+            )
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                CircularProgressIndicator(),
+                SizedBox(height: 20),
+                Text('Loading'),
+              ],
             ),
-            !_controller.value.isPlaying
-                ? Center(
-                    child: Icon(
-                      Icons.play_arrow,
-                      size: 100,
-                      color: Theme.of(context).accentColor,
-                    ),
-                  )
-                : Container()
-          ],
-        ),
-        onTap: () {
-          setState(() {
-            _controller.value.isPlaying
-                ? _controller.pause()
-                : _controller.play();
-          });
-        },
-      ),
     );
   }
 }

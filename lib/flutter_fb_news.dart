@@ -135,11 +135,9 @@ class _FbNewsState extends State<FbNews> {
                     ),
                   );
             else
-              return SingleChildScrollView(
-                child: FbNewsFeed(
-                  feedResponse: snapshot.data.body,
-                  subtitle: widget.subtitle,
-                ),
+              return FbNewsFeed(
+                feedResponse: snapshot.data.body,
+                subtitle: widget.subtitle,
               );
         }
       },
