@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'flutter_fb_news.dart';
 
 class FbNewsService {
-  Future<http.Response> getFeed({
+  static Future<http.Response> getFeed({
     String pageId,
     String token,
     int limit = 20,

@@ -58,7 +58,6 @@ class FbNews extends StatefulWidget {
   /// ```dart
   /// [
   ///   FbNewsFields.attachments,
-  ///   FbNewsFields.fullPicture,
   ///   FbNewsFields.message,
   /// ];
   /// ```
@@ -67,7 +66,6 @@ class FbNews extends StatefulWidget {
   /// ```dart
   /// [
   ///   FbNewsFields.attachments,
-  ///   FbNewsFields.fullPicture,
   ///   FbNewsFields.message,
   /// ];
   /// ```
@@ -87,7 +85,6 @@ class FbNews extends StatefulWidget {
   }) : fields = fields ??
             [
               FbNewsFields.attachments,
-              FbNewsFields.fullPicture,
               FbNewsFields.message,
             ];
   @override
@@ -98,7 +95,7 @@ class _FbNewsState extends State<FbNews> {
   @override
   Widget build(BuildContext context) {
     return new FutureBuilder<http.Response>(
-      future: FbNewsService().getFeed(
+      future: FbNewsService.getFeed(
         pageId: widget.pageId,
         token: widget.accesToken,
         limit: widget.limit,
@@ -152,7 +149,6 @@ class _FbNewsState extends State<FbNews> {
 
 class FbNewsFields {
   static final FbNewsFieldName attachments = FbNewsFieldName("attachments");
-  static final FbNewsFieldName fullPicture = FbNewsFieldName("full_picture");
   static final FbNewsFieldName message = FbNewsFieldName("message");
 }
 

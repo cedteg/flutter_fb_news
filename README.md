@@ -16,7 +16,6 @@ Center(
         limit: 25,
         fields: [
             FbNewsFields.attachments,
-            FbNewsFields.fullPicture,
             FbNewsFields.message,
         ]
     ),

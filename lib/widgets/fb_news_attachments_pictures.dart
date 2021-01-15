@@ -1,9 +1,12 @@
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 
 class FbNewsAttachmentsPictures extends StatelessWidget {
   final Map<String, dynamic> feed;
+
+  @internal
   const FbNewsAttachmentsPictures({
     @required this.feed,
   });

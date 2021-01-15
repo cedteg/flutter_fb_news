@@ -10,9 +10,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'flutter_fb_news example',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: MyHomePage(),
     );
   }
@@ -30,17 +27,21 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text("flutter_fb_news example"),
       ),
-      body: Center(
-        child: FbNews(
           accesToken: "xzy",
           pageId: "123567890",
-          limit: 25,
-          fields: [
-            FbNewsFields.attachments,
-            FbNewsFields.fullPicture,
-            FbNewsFields.message,
-          ],
-        ),
+      body: Column(
+        children: [
+          Center(
+            child: FbNews(
+              accesToken:
+              limit: 25,
+              fields: [
+                FbNewsFields.attachments,
+                FbNewsFields.message,
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

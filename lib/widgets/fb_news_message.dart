@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 
 class FbNewsMessage extends StatelessWidget {
+  @internal
   final Map<String, dynamic> feed;
   const FbNewsMessage({
     @required this.feed,

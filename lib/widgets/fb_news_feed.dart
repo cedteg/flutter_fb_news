@@ -2,16 +2,17 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_fb_news/widgets/fb_news_message.dart';
+import 'package:meta/meta.dart';
 
-import 'fb_news_attachments_pictures.dart';
+import 'fb_news_attachments.dart';
 import 'fb_news_footer.dart';
-import 'fb_news_full_picture.dart';
 import 'fb_news_header.dart';
 
 class FbNewsFeed extends StatelessWidget {
   final String subtitle;
   final String feedResponse;
 
+  @internal
   const FbNewsFeed({
     @required this.feedResponse,
     @required this.subtitle,
@@ -44,10 +45,7 @@ class FbNewsFeed extends StatelessWidget {
                         SizedBox(
                           height: 10,
                         ),
-                        FbNewsAttachmentsPictures(
-                          feed: feed,
-                        ),
-                        FbNewsFullPicture(
+                        FbNewsAttachments(
                           feed: feed,
                         ),
                         FbNewsFooter(

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FbNewsFooter extends StatelessWidget {
   final Map<String, dynamic> feed;
+
+  @internal
   const FbNewsFooter({
     @required this.feed,
   });
@@ -11,6 +14,7 @@ class FbNewsFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           Icon(
             Icons.thumb_up,
