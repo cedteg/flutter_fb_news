@@ -1,11 +1,16 @@
 library flutter_fb_news;
 
+// Dart imports:
 import 'dart:convert';
 
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:flutter_fb_news/fb_news_service.dart';
+
+// Package imports:
 import 'package:http/http.dart' as http;
 
+// Project imports:
+import 'fb_news_service.dart';
 import 'widgets/fb_news_feed.dart';
 
 /// Flutter plugin for displaying Facebook page feed with photos and videos

@@ -1,6 +1,8 @@
-import 'package:flutter_fb_news/widgets/fb_news_message.dart';
+// Package imports:
 import 'package:flutter_test/flutter_test.dart';
 
+// Project imports:
+import 'package:flutter_fb_news/widgets/fb_news_message.dart';
 import '../TestMaterialWidget.dart';
 
 void main() {

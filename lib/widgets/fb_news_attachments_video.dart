@@ -1,6 +1,9 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
+
+// Package imports:
 import 'package:chewie/chewie.dart';
+import 'package:meta/meta.dart';
 import 'package:video_player/video_player.dart';
 
 class FbNewsAttachmentsVideo extends StatefulWidget {

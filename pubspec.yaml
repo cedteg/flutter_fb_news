@@ -1,6 +1,6 @@
 name: flutter_fb_news
 description: Flutter plugin for displaying Facebook page feed with photos and videos
-version: 0.0.5
+version: 0.1.0
 homepage: https://github.com/cedteg/flutter_fb_news
 
 environment:
@@ -20,5 +20,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  import_sorter: ^4.4.1
 
 flutter:

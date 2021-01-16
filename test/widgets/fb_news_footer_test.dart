@@ -1,7 +1,11 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:flutter_fb_news/widgets/fb_news_footer.dart';
+
+// Package imports:
 import 'package:flutter_test/flutter_test.dart';
 
+// Project imports:
+import 'package:flutter_fb_news/widgets/fb_news_footer.dart';
 import '../TestMaterialWidget.dart';
 
 void main() {

@@ -1,3 +1,7 @@
+## [0.1.0] - 2021.01.16
+* Optimize Imports
+* Update Demo 
+
 ## [0.0.5] - 2021.01.15
 * add profile picture to feeditem
 ## [0.0.4+1] - 2021.01.15

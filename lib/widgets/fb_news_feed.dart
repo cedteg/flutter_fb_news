@@ -1,12 +1,17 @@
+// Dart imports:
 import 'dart:convert';
 
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:flutter_fb_news/widgets/fb_news_message.dart';
+
+// Package imports:
 import 'package:meta/meta.dart';
 
+// Project imports:
 import 'fb_news_attachments.dart';
 import 'fb_news_footer.dart';
 import 'fb_news_header.dart';
+import 'fb_news_message.dart';
 
 class FbNewsFeed extends StatelessWidget {
   final String subtitle;
