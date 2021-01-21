@@ -6,8 +6,8 @@ pipeline {
         stage('FLUTTER VERSION') {
            steps {
               script {
-                 sh 'git --git-dir=/Users/cedrictegenkamp/dev/GitHub/flutter/.git --work-tree=/Users/cedrictegenkamp/dev/GitHub/flutter/ stash'
-                 sh 'git --git-dir=/Users/cedrictegenkamp/dev/GitHub/flutter/.git --work-tree=/Users/cedrictegenkamp/dev/GitHub/flutter/ checkout $CUSTOM_FLUTTER_VERSION'
+                 sh 'git --git-dir=$FLUTTER_DIR.git --work-tree=$FLUTTER_DIR stash'
+                 sh 'git --git-dir=$FLUTTER_DIR.git --work-tree=$FLUTTER_DIR checkout $CUSTOM_FLUTTER_VERSION'
                  if ( CUSTOM_FLUTTER_VERSION == 'beta' ) { 
                     sh 'flutter upgrade' 
                  }
