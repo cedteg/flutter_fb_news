@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:meta/meta.dart';
 
 // Project imports:
 import 'fb_news_attachments_video.dart';
@@ -11,7 +10,6 @@ import 'fb_news_attachments_video.dart';
 class FbNewsAttachments extends StatefulWidget {
   final Map<String, dynamic> feed;
 
-  @internal
   const FbNewsAttachments({
     @required this.feed,
   });

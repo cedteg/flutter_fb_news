@@ -4,9 +4,6 @@ import 'dart:convert';
 // Flutter imports:
 import 'package:flutter/material.dart';
 
-// Package imports:
-import 'package:meta/meta.dart';
-
 // Project imports:
 import 'fb_news_attachments.dart';
 import 'fb_news_footer.dart';
@@ -18,7 +15,6 @@ class FbNewsFeed extends StatelessWidget {
   final String feedResponse;
   final String profilePictureUrl;
 
-  @internal
   const FbNewsFeed({
     @required this.feedResponse,
     @required this.subtitle,
