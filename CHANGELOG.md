@@ -1,5 +1,3 @@
-## [1.0.1-dev.1] - 2021.01.25
-* remove internal
 ## [1.0.0] - 2021.01.17
 * first stabel release
 ## [0.1.0] - 2021.01.16
