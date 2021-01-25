@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:meta/meta.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FbNewsHeader extends StatelessWidget {
@@ -10,7 +9,6 @@ class FbNewsHeader extends StatelessWidget {
   final String subtitle;
   final String profilePictureUrl;
 
-  @internal
   const FbNewsHeader({
     @required this.feed,
     @required this.subtitle,
