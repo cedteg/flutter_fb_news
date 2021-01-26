@@ -13,20 +13,22 @@ class FbNewsFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Wrap(
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: [
-          Icon(
-            Icons.thumb_up,
-          ),
-          SizedBox(
-            width: 5,
-          ),
-          Text(
-            feed["likes"]["data"].length.toString(),
-          ),
-        ],
-      ),
+      leading: feed["likes"] == null
+          ? null
+          : Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                Icon(
+                  Icons.thumb_up,
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  feed["likes"]["data"].length.toString() ?? "",
+                ),
+              ],
+            ),
       trailing: Text(
         DateTime.parse(feed["created_time"])
             .toLocal()
