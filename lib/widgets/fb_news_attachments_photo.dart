@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
+/// Only for internal use of flutter_fb_news
 class FbNewsAttachmentsPictures extends StatelessWidget {
+  /// Only for internal use of flutter_fb_news
   final Map<String, dynamic> feed;
 
   const FbNewsAttachmentsPictures({

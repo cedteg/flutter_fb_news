@@ -20,7 +20,10 @@ Center(
             FbNewsFields.attachmentsVideos,
             FbNewsFields.message,
             FbNewsFields.footer,
-        ]
+        ],
+        borderColor: Colors.black,
+        backgroundColor: Colors.white,
+        textColor: Colors.black,
     ),
 ),
 ```

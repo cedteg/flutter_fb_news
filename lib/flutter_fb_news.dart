@@ -86,6 +86,22 @@ class FbNews extends StatefulWidget {
   /// Subtitle in the every feeditem
   final String subtitle;
 
+  /// Set the Color of the border
+  ///
+  /// #### DEFAULT
+  /// Theme.of(context).accentColor
+  final Color borderColor;
+
+  /// Set the Color of the background
+  ///
+  /// #### DEFAULT
+  /// If this property is null then [CardTheme.color] of [ThemeData.cardTheme]
+  /// is used. If that's null then [ThemeData.cardColor] is used.
+  final Color backgroundColor;
+
+  /// Set the Color of the text
+  final Color textColor;
+
   FbNews({
     @required this.pageId,
     @required this.accesToken,
@@ -93,7 +109,10 @@ class FbNews extends StatefulWidget {
     this.waiting,
     this.noDataOrError,
     this.subtitle = "von Facebook",
+    this.borderColor,
     fields,
+    this.backgroundColor,
+    this.textColor,
   }) : fields = fields ??
             [
               FbNewsFields.header,
@@ -189,6 +208,9 @@ class _FbNewsState extends State<FbNews> {
                                           .toString(),
                                   subtitle: widget.subtitle,
                                   fields: widget.fields,
+                                  borderColor: widget.borderColor,
+                                  backgroundColor: widget.backgroundColor,
+                                  textColor: widget.textColor,
                                 );
                       }
                     },

@@ -12,17 +12,37 @@ import 'fb_news_footer.dart';
 import 'fb_news_header.dart';
 import 'fb_news_message.dart';
 
+/// Only for internal use of flutter_fb_news
 class FbNewsFeed extends StatelessWidget {
+  /// Only for internal use of flutter_fb_news
   final String subtitle;
+
+  /// Only for internal use of flutter_fb_news
   final String feedResponse;
+
+  /// Only for internal use of flutter_fb_news
   final String profilePictureUrl;
+
+  /// Only for internal use of flutter_fb_news
   final List<FbNewsFieldName> fields;
+
+  /// Only for internal use of flutter_fb_news
+  final Color borderColor;
+
+  /// Only for internal use of flutter_fb_news
+  final Color backgroundColor;
+
+  /// Only for internal use of flutter_fb_news
+  final Color textColor;
 
   const FbNewsFeed({
     @required this.feedResponse,
     @required this.subtitle,
     @required this.profilePictureUrl,
     @required this.fields,
+    this.borderColor,
+    this.backgroundColor,
+    this.textColor,
   });
 
   bool hasField(String internalKey) {
@@ -40,11 +60,12 @@ class FbNewsFeed extends StatelessWidget {
       children: jsonDecode(feedResponse)["data"]
           .map(
             (feed) => Card(
-              color: Theme.of(context).accentColor,
+              color: borderColor ?? Theme.of(context).accentColor,
               child: Container(
                 width: 460,
                 padding: EdgeInsets.all(10),
                 child: Card(
+                  color: backgroundColor,
                   child: Container(
                     width: 430,
                     child: Column(
@@ -56,6 +77,7 @@ class FbNewsFeed extends StatelessWidget {
                                 subtitle: subtitle,
                                 feed: feed,
                                 profilePictureUrl: profilePictureUrl,
+                                textColor: textColor,
                               )
                             : Container(),
                         hasField(
@@ -63,6 +85,7 @@ class FbNewsFeed extends StatelessWidget {
                         )
                             ? FbNewsMessage(
                                 feed: feed,
+                                textColor: textColor,
                               )
                             : Container(),
                         hasField(
@@ -90,6 +113,7 @@ class FbNewsFeed extends StatelessWidget {
                         )
                             ? FbNewsFooter(
                                 feed: feed,
+                                textColor: textColor,
                               )
                             : Container(),
                       ],
