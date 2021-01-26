@@ -45,8 +45,9 @@ class _FbNewsAttachmentsVideoState extends State<FbNewsAttachmentsVideo> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 460,
-      height: 460,
+      height: _chewieController != null
+          ? _chewieController.videoPlayerController.value.size.height
+          : null,
       child: _chewieController != null &&
               _chewieController.videoPlayerController.value.initialized
           ? Chewie(
