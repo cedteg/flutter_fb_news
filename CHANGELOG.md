@@ -1,8 +1,8 @@
 ## [1.1.0-dev.2] - 2021.01.26
-*  
 * add borderColor
 * add backgroundColor
 * add textColor
+* **fix** render videos with dynamic heigt
 ## [1.1.0-dev.1] - 2021.01.26
 *  **DEPRECATED:** `attachment` use `attachmentsPhotos` or `attachmentsVideos`
 * add FbNewsFields.header
