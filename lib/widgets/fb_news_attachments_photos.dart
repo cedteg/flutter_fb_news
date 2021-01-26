@@ -1,13 +1,11 @@
-// Flutter imports:
+// Dart imports:
 import 'dart:convert';
 
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:carousel_slider/carousel_slider.dart';
-
-// Project imports:
-import 'fb_news_attachments_video.dart';
 
 class FbNewsAttachmentsPhotos extends StatefulWidget {
   final Map<String, dynamic> feed;

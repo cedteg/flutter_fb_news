@@ -3,11 +3,11 @@ import 'dart:convert';
 
 // Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:flutter_fb_news/flutter_fb_news.dart';
-import 'package:flutter_fb_news/widgets/fb_news_attachments_videos.dart';
 
 // Project imports:
+import '../flutter_fb_news.dart';
 import 'fb_news_attachments_photos.dart';
+import 'fb_news_attachments_videos.dart';
 import 'fb_news_footer.dart';
 import 'fb_news_header.dart';
 import 'fb_news_message.dart';
@@ -66,7 +66,7 @@ class FbNewsFeed extends StatelessWidget {
                               )
                             : Container(),
                         hasField(
-                                  FbNewsFields.attachments.internalKey,
+                                  "attachments",
                                 ) ||
                                 hasField(
                                   FbNewsFields.attachmentsPhotos.internalKey,
@@ -76,7 +76,7 @@ class FbNewsFeed extends StatelessWidget {
                               )
                             : Container(),
                         hasField(
-                                  FbNewsFields.attachments.internalKey,
+                                  "attachments",
                                 ) ||
                                 hasField(
                                   FbNewsFields.attachmentsVideos.internalKey,

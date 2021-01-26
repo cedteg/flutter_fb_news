@@ -37,10 +37,6 @@ class _MyHomePageState extends State<MyHomePage> {
               accesToken: "xyz",
               pageId: "1234567890",
               limit: 25,
-              fields: [
-                FbNewsFields.attachments,
-                FbNewsFields.message,
-              ],
             ),
           ),
         ),
