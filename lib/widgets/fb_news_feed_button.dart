@@ -2,13 +2,11 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:meta/meta.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FacebookFeedButton extends StatelessWidget {
   final Map<String, dynamic> feed;
 
-  @internal
   const FacebookFeedButton({
     @required this.feed,
   });
