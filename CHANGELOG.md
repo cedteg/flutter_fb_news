@@ -1,5 +1,11 @@
+## [1.1.0-dev.1] - 2021.01.26
+*  **DEPRECATED:** `attachment` use `attachmentsPhotos` or `attachmentsVideos`
+* add FbNewsFields.header
+* add FbNewsFields.attachmentsPhotos
+* add FbNewsFields.attachmentsVideos
+* add FbNewsFields.footer
 ## [1.0.1] - 2021.01.26
-* fix no likes provided 
+* **fix** no likes provided 
 ## [1.0.0] - 2021.01.17
 * first stabel release
 ## [0.1.0] - 2021.01.16

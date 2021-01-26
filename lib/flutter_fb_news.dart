@@ -66,8 +66,11 @@ class FbNews extends StatefulWidget {
   /// #### Supported fields are
   /// ```dart
   /// [
-  ///   FbNewsFields.attachments,
+  ///   FbNewsFields.header,
+  ///   FbNewsFields.attachmentsPhotos,
+  ///   FbNewsFields.attachmentsVideos,
   ///   FbNewsFields.message,
+  ///   FbNewsFields.footer,
   /// ];
   /// ```
   ///
@@ -93,8 +96,11 @@ class FbNews extends StatefulWidget {
     fields,
   }) : fields = fields ??
             [
-              FbNewsFields.attachments,
+              FbNewsFields.header,
+              FbNewsFields.attachmentsPhotos,
+              FbNewsFields.attachmentsVideos,
               FbNewsFields.message,
+              FbNewsFields.footer,
             ];
   @override
   _FbNewsState createState() => _FbNewsState();
@@ -121,94 +127,134 @@ class _FbNewsState extends State<FbNews> {
                   ],
                 );
           default:
-            if (!snapshot1.hasData ||
-                snapshot1.hasError ||
-                snapshot1.data.body.contains(
-                  "Exception",
-                ))
-              return widget.noDataOrError ??
-                  Card(
-                    color: Colors.red,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          snapshot1.error ?? snapshot1.data.body,
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        )
-                      ],
+            return hasErrors(snapshot1)
+                ? widget.noDataOrError ??
+                    Card(
+                      color: Colors.red,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            snapshot1.error ?? snapshot1.data.body,
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                : new FutureBuilder<http.Response>(
+                    future: FbNewsService.getFeed(
+                      pageId: widget.pageId,
+                      token: widget.accesToken,
+                      limit: widget.limit,
+                      fields: widget.fields,
                     ),
-                  );
-            else
-              return new FutureBuilder<http.Response>(
-                future: FbNewsService.getFeed(
-                  pageId: widget.pageId,
-                  token: widget.accesToken,
-                  limit: widget.limit,
-                  fields: widget.fields,
-                ),
-                builder: (context, snapshot2) {
-                  switch (snapshot2.connectionState) {
-                    case ConnectionState.waiting:
-                      return widget.waiting ??
-                          Column(
-                            children: [
-                              CircularProgressIndicator(),
-                              SizedBox(
-                                height: 10,
-                              )
-                            ],
-                          );
-                    default:
-                      if (!snapshot2.hasData ||
-                          snapshot2.hasError ||
-                          snapshot2.data.body.contains(
-                            "Exception",
-                          ))
-                        return widget.noDataOrError ??
-                            Card(
-                              color: Colors.red,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                    builder: (context, snapshot2) {
+                      switch (snapshot2.connectionState) {
+                        case ConnectionState.waiting:
+                          return widget.waiting ??
+                              Column(
                                 children: [
-                                  Text(
-                                    snapshot2.error ?? snapshot2.data.body,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
+                                  CircularProgressIndicator(),
+                                  SizedBox(
+                                    height: 10,
                                   )
                                 ],
-                              ),
-                            );
-                      else
-                        return FbNewsFeed(
-                          feedResponse: snapshot2.data.body,
-                          profilePictureUrl:
-                              jsonDecode(snapshot1.data.body)["picture"]["data"]
-                                      ["url"]
-                                  .toString(),
-                          subtitle: widget.subtitle,
-                        );
-                  }
-                },
-              );
+                              );
+                        default:
+                          return hasErrors(snapshot2)
+                              ? widget.noDataOrError ??
+                                  Card(
+                                    color: Colors.red,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          snapshot2.error ??
+                                              snapshot2.data.body,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                              : FbNewsFeed(
+                                  feedResponse: snapshot2.data.body,
+                                  profilePictureUrl:
+                                      jsonDecode(snapshot1.data.body)["picture"]
+                                              ["data"]["url"]
+                                          .toString(),
+                                  subtitle: widget.subtitle,
+                                  fields: widget.fields,
+                                );
+                      }
+                    },
+                  );
         }
       },
     );
   }
+
+  bool hasErrors(AsyncSnapshot<http.Response> snapshot) {
+    return (!snapshot.hasData ||
+        snapshot.hasError ||
+        snapshot.data.body.contains(
+          "Exception",
+        ));
+  }
 }
 
 class FbNewsFields {
-  static final FbNewsFieldName attachments = FbNewsFieldName("attachments");
-  static final FbNewsFieldName message = FbNewsFieldName("message");
+  @Deprecated(
+    "use [attachmentsVideos] or [attachmentsPhotos]",
+  )
+  static final FbNewsFieldName attachments = FbNewsFieldName(
+    "attachments",
+    "attachments",
+  );
+
+  /// Enables the display of videos
+  static final FbNewsFieldName attachmentsVideos = FbNewsFieldName(
+    "attachments",
+    "attachments_videos",
+  );
+
+  /// Enables the display of photos
+  static final FbNewsFieldName attachmentsPhotos = FbNewsFieldName(
+    "attachments",
+    "attachments_photos",
+  );
+
+  /// Enables the display of messages
+  static final FbNewsFieldName message = FbNewsFieldName(
+    "message",
+    "message",
+  );
+
+  /// Enables the display of headers
+  static final FbNewsFieldName header = FbNewsFieldName(
+    "message",
+    "header",
+  );
+
+  /// Enables the display of footers
+  static final FbNewsFieldName footer = FbNewsFieldName(
+    "likes{id}",
+    "footer",
+  );
 }
 
 class FbNewsFieldName {
-  final String name;
+  /// Internal use to retrieve from the Facebook Api
+  final String facebookKey;
 
+  /// Internal use for handling internal widgets
+  final String internalKey;
   FbNewsFieldName(
-    this.name,
+    this.facebookKey,
+    this.internalKey,
   );
 }

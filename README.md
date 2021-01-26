@@ -15,8 +15,11 @@ Center(
         pageId: "123567890", // Your PageId
         limit: 25,
         fields: [
-            FbNewsFields.attachments,
+            FbNewsFields.header,
+            FbNewsFields.attachmentsPhotos,
+            FbNewsFields.attachmentsVideos,
             FbNewsFields.message,
+            FbNewsFields.footer,
         ]
     ),
 ),

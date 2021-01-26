@@ -25,7 +25,7 @@ class FbNewsFooter extends StatelessWidget {
                   width: 5,
                 ),
                 Text(
-                  feed["likes"]["data"].length.toString() ?? "",
+                  feed["likes"]["data"].length.toString(),
                 ),
               ],
             ),

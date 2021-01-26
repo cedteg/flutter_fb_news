@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 class FbNewsMessage extends StatelessWidget {
@@ -9,7 +11,7 @@ class FbNewsMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return feed.toString().contains("message")
+    return jsonEncode(feed).contains("message")
         ? Container(
             padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
             child: Text(

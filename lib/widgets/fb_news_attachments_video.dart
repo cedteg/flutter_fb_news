@@ -34,20 +34,9 @@ class _FbNewsAttachmentsVideoState extends State<FbNewsAttachmentsVideo> {
       videoPlayerController: _videoPlayerController1,
       autoPlay: false,
       looping: true,
-
-      // Try playing around with some of these other options:
       allowFullScreen: false,
       showControls: true,
       customControls: MaterialControls(),
-      // materialProgressColors: ChewieProgressColors(
-      //   playedColor: Colors.red,
-      //   handleColor: Colors.blue,
-      //   backgroundColor: Colors.grey,
-      //   bufferedColor: Colors.lightGreen,
-      // ),
-      // placeholder: Container(
-      //   color: Colors.grey,
-      // ),
       autoInitialize: true,
     );
     setState(() {});
@@ -68,7 +57,7 @@ class _FbNewsAttachmentsVideoState extends State<FbNewsAttachmentsVideo> {
               children: const [
                 CircularProgressIndicator(),
                 SizedBox(height: 20),
-                Text('Loading'),
+                Text('Loading...'),
               ],
             ),
     );

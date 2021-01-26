@@ -3,9 +3,11 @@ import 'dart:convert';
 
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:flutter_fb_news/flutter_fb_news.dart';
+import 'package:flutter_fb_news/widgets/fb_news_attachments_videos.dart';
 
 // Project imports:
-import 'fb_news_attachments.dart';
+import 'fb_news_attachments_photos.dart';
 import 'fb_news_footer.dart';
 import 'fb_news_header.dart';
 import 'fb_news_message.dart';
@@ -14,12 +16,21 @@ class FbNewsFeed extends StatelessWidget {
   final String subtitle;
   final String feedResponse;
   final String profilePictureUrl;
+  final List<FbNewsFieldName> fields;
 
   const FbNewsFeed({
     @required this.feedResponse,
     @required this.subtitle,
     @required this.profilePictureUrl,
+    @required this.fields,
   });
+
+  bool hasField(String internalKey) {
+    return fields
+        .where((element) => element.internalKey == internalKey)
+        .isNotEmpty;
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Wrap(
@@ -38,23 +49,49 @@ class FbNewsFeed extends StatelessWidget {
                     width: 430,
                     child: Column(
                       children: [
-                        FbNewsHeader(
-                          subtitle: subtitle,
-                          feed: feed,
-                          profilePictureUrl: profilePictureUrl,
-                        ),
-                        FbNewsMessage(
-                          feed: feed,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        FbNewsAttachments(
-                          feed: feed,
-                        ),
-                        FbNewsFooter(
-                          feed: feed,
-                        ),
+                        hasField(
+                          FbNewsFields.header.internalKey,
+                        )
+                            ? FbNewsHeader(
+                                subtitle: subtitle,
+                                feed: feed,
+                                profilePictureUrl: profilePictureUrl,
+                              )
+                            : Container(),
+                        hasField(
+                          FbNewsFields.message.internalKey,
+                        )
+                            ? FbNewsMessage(
+                                feed: feed,
+                              )
+                            : Container(),
+                        hasField(
+                                  FbNewsFields.attachments.internalKey,
+                                ) ||
+                                hasField(
+                                  FbNewsFields.attachmentsPhotos.internalKey,
+                                )
+                            ? FbNewsAttachmentsPhotos(
+                                feed: feed,
+                              )
+                            : Container(),
+                        hasField(
+                                  FbNewsFields.attachments.internalKey,
+                                ) ||
+                                hasField(
+                                  FbNewsFields.attachmentsVideos.internalKey,
+                                )
+                            ? FbNewsAttachmentsVideos(
+                                feed: feed,
+                              )
+                            : Container(),
+                        hasField(
+                          FbNewsFields.footer.internalKey,
+                        )
+                            ? FbNewsFooter(
+                                feed: feed,
+                              )
+                            : Container(),
                       ],
                     ),
                   ),
