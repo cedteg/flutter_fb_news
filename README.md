@@ -14,16 +14,18 @@ Center(
         accesToken:"xyz", // Your Page AccesToken
         pageId: "123567890", // Your PageId
         limit: 25,
-        fields: [
-            FbNewsFields.header,
-            FbNewsFields.attachmentsPhotos,
-            FbNewsFields.attachmentsVideos,
-            FbNewsFields.message,
-            FbNewsFields.footer,
-        ],
-        borderColor: Colors.black,
-        backgroundColor: Colors.white,
-        textColor: Colors.black,
+        config: FbNewsConfig(
+            fields: [
+                FbNewsFields.header,
+                FbNewsFields.attachmentsPhotos,
+                FbNewsFields.attachmentsVideos,
+                FbNewsFields.message,
+                FbNewsFields.footer,
+            ],
+            borderColor: Colors.black,
+            backgroundColor: Colors.white,
+            textColor: Colors.black,
+        ),
     ),
 ),
 ```
