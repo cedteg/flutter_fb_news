@@ -1,6 +1,4 @@
-## [1.1.0-dev.4] - 2021.01.27
-* add `showBorder` to toogle the display of the border
-## [1.1.0-dev.3] - 2021.01.27
+## [1.1.0] - 2021.01.27
 * add `FbNewsConfig` config
 * **DEPRECATED:** `waiting` use `FbNewsConfig(waiting)`
 * **DEPRECATED:** `noDataOrError` use `FbNewsConfig(noDataOrError)`
@@ -9,17 +7,16 @@
 * **DEPRECATED:** `borderColor` use `FbNewsConfig(borderColor)`
 * **DEPRECATED:** `backgroundColor` use `FbNewsConfig(backgroundColor)`
 * **DEPRECATED:** `textColor` use `FbNewsConfig(textColor)`
-## [1.1.0-dev.2] - 2021.01.26
+* **DEPRECATED:** `attachment` use `attachmentsPhotos` or `attachmentsVideos`
+* add `showBorder`
 * add `borderColor`
 * add `backgroundColor`
 * add `textColor`
+* add `FbNewsFields.header`
+* add `FbNewsFields.attachmentsPhotos`
+* add `FbNewsFields.attachmentsVideos`
+* add `FbNewsFields.footer`
 * **fix** render videos with dynamic heigt
-## [1.1.0-dev.1] - 2021.01.26
-*  **DEPRECATED:** `attachment` use `attachmentsPhotos` or `attachmentsVideos`
-* add FbNewsFields.header
-* add FbNewsFields.attachmentsPhotos
-* add FbNewsFields.attachmentsVideos
-* add FbNewsFields.footer
 ## [1.0.1] - 2021.01.26
 * **fix** no likes provided 
 ## [1.0.0] - 2021.01.17
