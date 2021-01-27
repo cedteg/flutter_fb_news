@@ -30,12 +30,6 @@ class FbNewsFeed extends StatelessWidget {
     @required this.config,
   });
 
-  bool hasField(String internalKey) {
-    return config.fields
-        .where((element) => element.internalKey == internalKey)
-        .isNotEmpty;
-  }
-
   @override
   Widget build(BuildContext context) {
     return new Wrap(
@@ -44,71 +38,108 @@ class FbNewsFeed extends StatelessWidget {
       direction: Axis.horizontal,
       children: jsonDecode(feedResponse)["data"]
           .map(
-            (feed) => Card(
-              color: config.borderColor ?? Theme.of(context).accentColor,
-              child: Container(
-                width: 460,
-                padding: EdgeInsets.all(10),
-                child: Card(
-                  color: config.backgroundColor,
-                  child: Container(
-                    width: 430,
-                    child: Column(
-                      children: [
-                        hasField(
-                          FbNewsFields.header.internalKey,
-                        )
-                            ? FbNewsHeader(
-                                feed: feed,
-                                profilePictureUrl: profilePictureUrl,
-                                config: config,
-                              )
-                            : Container(),
-                        hasField(
-                          FbNewsFields.message.internalKey,
-                        )
-                            ? FbNewsMessage(
-                                feed: feed,
-                                config: config,
-                              )
-                            : Container(),
-                        hasField(
-                                  "attachments",
-                                ) ||
-                                hasField(
-                                  FbNewsFields.attachmentsPhotos.internalKey,
-                                )
-                            ? FbNewsAttachmentsPhotos(
-                                feed: feed,
-                              )
-                            : Container(),
-                        hasField(
-                                  "attachments",
-                                ) ||
-                                hasField(
-                                  FbNewsFields.attachmentsVideos.internalKey,
-                                )
-                            ? FbNewsAttachmentsVideos(
-                                feed: feed,
-                              )
-                            : Container(),
-                        hasField(
-                          FbNewsFields.footer.internalKey,
-                        )
-                            ? FbNewsFooter(
-                                feed: feed,
-                                config: config,
-                              )
-                            : Container(),
-                      ],
+            (feed) => config.showBorder
+                ? Card(
+                    color: config.borderColor ?? Theme.of(context).accentColor,
+                    child: FbNewsFeedLayout(
+                      config: config,
+                      profilePictureUrl: profilePictureUrl,
+                      feed: feed,
                     ),
+                  )
+                : FbNewsFeedLayout(
+                    config: config,
+                    profilePictureUrl: profilePictureUrl,
+                    feed: feed,
                   ),
-                ),
-              ),
-            ),
           )
           .cast<Widget>()
           .toList(),
+    );
+  }
+}
+
+class FbNewsFeedLayout extends StatelessWidget {
+  /// Only for internal use of flutter_fb_news
+  final Map<String, dynamic> feed;
+
+  /// Only for internal use of flutter_fb_news
+  final FbNewsConfig config;
+
+  /// Only for internal use of flutter_fb_news
+  final String profilePictureUrl;
+  const FbNewsFeedLayout({
+    @required this.feed,
+    @required this.profilePictureUrl,
+    @required this.config,
+  });
+
+  bool hasField(String internalKey) {
+    return config.fields
+        .where((element) => element.internalKey == internalKey)
+        .isNotEmpty;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 460,
+      padding: EdgeInsets.all(10),
+      child: Card(
+        color: config.backgroundColor,
+        child: Container(
+          width: 430,
+          child: Column(
+            children: [
+              hasField(
+                FbNewsFields.header.internalKey,
+              )
+                  ? FbNewsHeader(
+                      feed: feed,
+                      profilePictureUrl: profilePictureUrl,
+                      config: config,
+                    )
+                  : Container(),
+              hasField(
+                FbNewsFields.message.internalKey,
+              )
+                  ? FbNewsMessage(
+                      feed: feed,
+                      config: config,
+                    )
+                  : Container(),
+              hasField(
+                        "attachments",
+                      ) ||
+                      hasField(
+                        FbNewsFields.attachmentsPhotos.internalKey,
+                      )
+                  ? FbNewsAttachmentsPhotos(
+                      feed: feed,
+                    )
+                  : Container(),
+              hasField(
+                        "attachments",
+                      ) ||
+                      hasField(
+                        FbNewsFields.attachmentsVideos.internalKey,
+                      )
+                  ? FbNewsAttachmentsVideos(
+                      feed: feed,
+                    )
+                  : Container(),
+              hasField(
+                FbNewsFields.footer.internalKey,
+              )
+                  ? FbNewsFooter(
+                      feed: feed,
+                      config: config,
+                    )
+                  : Container(),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

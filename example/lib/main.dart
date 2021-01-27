@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 borderColor: Colors.black,
                 backgroundColor: Colors.white,
                 textColor: Colors.black,
-                subtitle: "",
+                subtitle: "von Facebook",
               ),
             ),
           ),

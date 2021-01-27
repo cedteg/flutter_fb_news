@@ -134,6 +134,7 @@ class FbNews extends StatefulWidget {
                 FbNewsFields.footer,
               ],
           borderColor: borderColor,
+          showBorder: false,
           backgroundColor: backgroundColor,
           textColor: textColor,
         );

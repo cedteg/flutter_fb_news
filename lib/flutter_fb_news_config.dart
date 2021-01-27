@@ -74,6 +74,11 @@ class FbNewsConfig {
   /// Theme.of(context).accentColor
   final Color borderColor;
 
+  /// Toogle the display of the border
+  ///
+  /// #### DEFAULT = true
+  final bool showBorder;
+
   /// Set the Color of the background
   ///
   /// #### DEFAULT
@@ -85,11 +90,12 @@ class FbNewsConfig {
   final Color textColor;
 
   FbNewsConfig({
-    this.subtitle,
+    this.subtitle = "von Facebook",
     this.waiting,
     this.noDataOrError,
     this.fields,
     this.borderColor,
+    this.showBorder = true,
     this.backgroundColor,
     this.textColor,
   });

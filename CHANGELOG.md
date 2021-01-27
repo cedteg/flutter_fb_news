@@ -1,4 +1,6 @@
 ## [1.1.0-dev.3] - 2021.01.27
+* add `showBorder` to toogle the display of the border
+## [1.1.0-dev.3] - 2021.01.27
 * add `FbNewsConfig` config
 * **DEPRECATED:** `waiting` use `FbNewsConfig(waiting)`
 * **DEPRECATED:** `noDataOrError` use `FbNewsConfig(noDataOrError)`
