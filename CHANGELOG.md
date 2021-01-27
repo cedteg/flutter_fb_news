@@ -1,7 +1,16 @@
+## [1.1.0-dev.3] - 2021.01.27
+* add `FbNewsConfig` config
+* **DEPRECATED:** `waiting` use `FbNewsConfig(waiting)`
+* **DEPRECATED:** `noDataOrError` use `FbNewsConfig(noDataOrError)`
+* **DEPRECATED:** `subtitle` use `FbNewsConfig(subtitle)`
+* **DEPRECATED:** `fields` use `FbNewsConfig(fields)`
+* **DEPRECATED:** `borderColor` use `FbNewsConfig(borderColor)`
+* **DEPRECATED:** `backgroundColor` use `FbNewsConfig(backgroundColor)`
+* **DEPRECATED:** `textColor` use `FbNewsConfig(textColor)`
 ## [1.1.0-dev.2] - 2021.01.26
-* add borderColor
-* add backgroundColor
-* add textColor
+* add `borderColor`
+* add `backgroundColor`
+* add `textColor`
 * **fix** render videos with dynamic heigt
 ## [1.1.0-dev.1] - 2021.01.26
 *  **DEPRECATED:** `attachment` use `attachmentsPhotos` or `attachmentsVideos`

@@ -4,18 +4,21 @@ import 'dart:convert';
 // Flutter imports:
 import 'package:flutter/material.dart';
 
+// Project imports:
+import 'flutter_fb_news_config.dart';
+
 /// Only for internal use of flutter_fb_news
 class FbNewsMessage extends StatelessWidget {
   /// Only for internal use of flutter_fb_news
   final Map<String, dynamic> feed;
 
   /// Only for internal use of flutter_fb_news
-  final Color textColor;
+  final FbNewsConfig config;
 
   /// Only for internal use of flutter_fb_news
   const FbNewsMessage({
     @required this.feed,
-    this.textColor,
+    this.config,
   });
 
   @override
@@ -26,7 +29,7 @@ class FbNewsMessage extends StatelessWidget {
             child: Text(
               feed["message"],
               style: TextStyle(
-                color: textColor,
+                color: config.textColor,
               ),
             ),
           )

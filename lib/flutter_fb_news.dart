@@ -10,8 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 // Project imports:
+import 'package:flutter_fb_news/flutter_fb_news_config.dart';
+import 'fb_news_feed.dart';
 import 'fb_news_service.dart';
-import 'widgets/fb_news_feed.dart';
 
 /// Flutter plugin for displaying Facebook page feed with photos and videos
 class FbNews extends StatefulWidget {
@@ -26,6 +27,9 @@ class FbNews extends StatefulWidget {
   ///
   /// #### DEFAULT = 20
   final int limit;
+
+  /// Subtitle in the every feeditem
+  final String subtitle;
 
   /// The [waiting] widget is displayed when the data is loaded
   ///
@@ -77,14 +81,14 @@ class FbNews extends StatefulWidget {
   /// #### DEFAULT
   /// ```dart
   /// [
-  ///   FbNewsFields.attachments,
+  ///   FbNewsFields.header,
+  ///   FbNewsFields.attachmentsPhotos,
+  ///   FbNewsFields.attachmentsVideos,
   ///   FbNewsFields.message,
+  ///   FbNewsFields.footer,
   /// ];
   /// ```
   final List<FbNewsFieldName> fields;
-
-  /// Subtitle in the every feeditem
-  final String subtitle;
 
   /// Set the Color of the border
   ///
@@ -102,25 +106,37 @@ class FbNews extends StatefulWidget {
   /// Set the Color of the text
   final Color textColor;
 
+  // Customize the appearance of the posts
+  final FbNewsConfig config;
+
   FbNews({
     @required this.pageId,
     @required this.accesToken,
     this.limit = 20,
-    this.waiting,
-    this.noDataOrError,
-    this.subtitle = "von Facebook",
-    this.borderColor,
-    fields,
-    this.backgroundColor,
-    this.textColor,
-  }) : fields = fields ??
-            [
-              FbNewsFields.header,
-              FbNewsFields.attachmentsPhotos,
-              FbNewsFields.attachmentsVideos,
-              FbNewsFields.message,
-              FbNewsFields.footer,
-            ];
+    config,
+    @Deprecated("use [FbNewsConfig(fields)]") this.waiting,
+    @Deprecated("use [FbNewsConfig(fields)]") this.noDataOrError,
+    @Deprecated("use [FbNewsConfig(fields)]") this.subtitle,
+    @Deprecated("use [FbNewsConfig(fields)]") this.fields,
+    @Deprecated("use [FbNewsConfig(fields)]") this.borderColor,
+    @Deprecated("use [FbNewsConfig(fields)]") this.backgroundColor,
+    @Deprecated("use [FbNewsConfig(fields)]") this.textColor,
+  }) : config = FbNewsConfig(
+          waiting: waiting,
+          noDataOrError: noDataOrError,
+          subtitle: subtitle ?? "von Facebook",
+          fields: fields ??
+              [
+                FbNewsFields.header,
+                FbNewsFields.attachmentsPhotos,
+                FbNewsFields.attachmentsVideos,
+                FbNewsFields.message,
+                FbNewsFields.footer,
+              ],
+          borderColor: borderColor,
+          backgroundColor: backgroundColor,
+          textColor: textColor,
+        );
   @override
   _FbNewsState createState() => _FbNewsState();
 }
@@ -136,7 +152,7 @@ class _FbNewsState extends State<FbNews> {
       builder: (context, snapshot1) {
         switch (snapshot1.connectionState) {
           case ConnectionState.waiting:
-            return widget.waiting ??
+            return widget.config.waiting ??
                 Column(
                   children: [
                     CircularProgressIndicator(),
@@ -147,7 +163,7 @@ class _FbNewsState extends State<FbNews> {
                 );
           default:
             return hasErrors(snapshot1)
-                ? widget.noDataOrError ??
+                ? widget.config.noDataOrError ??
                     Card(
                       color: Colors.red,
                       child: Row(
@@ -167,12 +183,12 @@ class _FbNewsState extends State<FbNews> {
                       pageId: widget.pageId,
                       token: widget.accesToken,
                       limit: widget.limit,
-                      fields: widget.fields,
+                      fields: widget.config.fields,
                     ),
                     builder: (context, snapshot2) {
                       switch (snapshot2.connectionState) {
                         case ConnectionState.waiting:
-                          return widget.waiting ??
+                          return widget.config.waiting ??
                               Column(
                                 children: [
                                   CircularProgressIndicator(),
@@ -183,7 +199,7 @@ class _FbNewsState extends State<FbNews> {
                               );
                         default:
                           return hasErrors(snapshot2)
-                              ? widget.noDataOrError ??
+                              ? widget.config.noDataOrError ??
                                   Card(
                                     color: Colors.red,
                                     child: Row(
@@ -206,11 +222,7 @@ class _FbNewsState extends State<FbNews> {
                                       jsonDecode(snapshot1.data.body)["picture"]
                                               ["data"]["url"]
                                           .toString(),
-                                  subtitle: widget.subtitle,
-                                  fields: widget.fields,
-                                  borderColor: widget.borderColor,
-                                  backgroundColor: widget.backgroundColor,
-                                  textColor: widget.textColor,
+                                  config: widget.config,
                                 );
                       }
                     },

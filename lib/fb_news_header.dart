@@ -4,25 +4,23 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:url_launcher/url_launcher.dart';
 
+// Project imports:
+import 'package:flutter_fb_news/flutter_fb_news_config.dart';
+
 /// Only for internal use of flutter_fb_news
 class FbNewsHeader extends StatelessWidget {
   /// Only for internal use of flutter_fb_news
   final Map<String, dynamic> feed;
 
   /// Only for internal use of flutter_fb_news
-  final String subtitle;
-
-  /// Only for internal use of flutter_fb_news
   final String profilePictureUrl;
-
-  /// Only for internal use of flutter_fb_news
-  final Color textColor;
+  // Customize the appearance of the posts
+  final FbNewsConfig config;
 
   const FbNewsHeader({
     @required this.feed,
-    @required this.subtitle,
     @required this.profilePictureUrl,
-    this.textColor,
+    @required this.config,
   });
 
   @override
@@ -34,13 +32,13 @@ class FbNewsHeader extends StatelessWidget {
       title: Text(
         feed["from"]["name"],
         style: TextStyle(
-          color: textColor,
+          color: config.textColor,
         ),
       ),
       subtitle: Text(
-        subtitle,
+        config.subtitle,
         style: TextStyle(
-          color: textColor,
+          color: config.textColor,
         ),
       ),
       onTap: () {
