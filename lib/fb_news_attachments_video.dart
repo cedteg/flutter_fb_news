@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:chewie/chewie.dart';
 import 'package:video_player/video_player.dart';
 
+/// Only for internal use of flutter_fb_news
 class FbNewsAttachmentsVideo extends StatefulWidget {
+  /// Only for internal use of flutter_fb_news
   final String videourl;
 
   const FbNewsAttachmentsVideo({
@@ -34,20 +36,9 @@ class _FbNewsAttachmentsVideoState extends State<FbNewsAttachmentsVideo> {
       videoPlayerController: _videoPlayerController1,
       autoPlay: false,
       looping: true,
-
-      // Try playing around with some of these other options:
       allowFullScreen: false,
       showControls: true,
       customControls: MaterialControls(),
-      // materialProgressColors: ChewieProgressColors(
-      //   playedColor: Colors.red,
-      //   handleColor: Colors.blue,
-      //   backgroundColor: Colors.grey,
-      //   bufferedColor: Colors.lightGreen,
-      // ),
-      // placeholder: Container(
-      //   color: Colors.grey,
-      // ),
       autoInitialize: true,
     );
     setState(() {});
@@ -56,8 +47,9 @@ class _FbNewsAttachmentsVideoState extends State<FbNewsAttachmentsVideo> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 460,
-      height: 460,
+      height: _chewieController != null
+          ? _chewieController.videoPlayerController.value.size.height
+          : null,
       child: _chewieController != null &&
               _chewieController.videoPlayerController.value.initialized
           ? Chewie(
@@ -68,7 +60,7 @@ class _FbNewsAttachmentsVideoState extends State<FbNewsAttachmentsVideo> {
               children: const [
                 CircularProgressIndicator(),
                 SizedBox(height: 20),
-                Text('Loading'),
+                Text('Loading...'),
               ],
             ),
     );

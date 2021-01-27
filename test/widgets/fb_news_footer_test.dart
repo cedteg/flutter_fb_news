@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 // Project imports:
-import 'package:flutter_fb_news/widgets/fb_news_footer.dart';
+import 'package:flutter_fb_news/fb_news_footer.dart';
+import 'package:flutter_fb_news/flutter_fb_news_config.dart';
 import '../TestMaterialWidget.dart';
 
 void main() {
@@ -48,6 +49,7 @@ void main() {
       TestMaterialWidget(
         child: FbNewsFooter(
           feed: feed,
+          config: FbNewsConfig(),
         ),
       ),
     );
@@ -108,6 +110,7 @@ void main() {
       TestMaterialWidget(
         child: FbNewsFooter(
           feed: feed,
+          config: FbNewsConfig(),
         ),
       ),
     );
@@ -142,6 +145,7 @@ void main() {
       TestMaterialWidget(
         child: FbNewsFooter(
           feed: feed,
+          config: FbNewsConfig(),
         ),
       ),
     );
@@ -160,11 +164,11 @@ void main() {
       findsNothing,
     );
     expect(
-      find.widgetWithText(Wrap, "0"),
+      find.byIcon(Icons.thumb_up),
       findsOneWidget,
     );
     expect(
-      find.byIcon(Icons.thumb_up),
+      find.widgetWithText(Wrap, "0"),
       findsOneWidget,
     );
   });

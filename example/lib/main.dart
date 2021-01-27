@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_fb_news/flutter_fb_news.dart';
+import 'package:flutter_fb_news/flutter_fb_news_config.dart';
 
 void main() {
   runApp(MyApp());
@@ -37,10 +38,12 @@ class _MyHomePageState extends State<MyHomePage> {
               accesToken: "xyz",
               pageId: "1234567890",
               limit: 25,
-              fields: [
-                FbNewsFields.attachments,
-                FbNewsFields.message,
-              ],
+              config: FbNewsConfig(
+                borderColor: Colors.black,
+                backgroundColor: Colors.white,
+                textColor: Colors.black,
+                subtitle: "von Facebook",
+              ),
             ),
           ),
         ),

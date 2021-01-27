@@ -4,10 +4,20 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:url_launcher/url_launcher.dart';
 
+// Project imports:
+import 'flutter_fb_news_config.dart';
+
+/// Only for internal use of flutter_fb_news
 class FbNewsFooter extends StatelessWidget {
+  /// Only for internal use of flutter_fb_news
   final Map<String, dynamic> feed;
+
+  /// Only for internal use of flutter_fb_newsconfig
+  final FbNewsConfig config;
+
   const FbNewsFooter({
     @required this.feed,
+    this.config,
   });
 
   @override
@@ -20,12 +30,16 @@ class FbNewsFooter extends StatelessWidget {
               children: [
                 Icon(
                   Icons.thumb_up,
+                  color: config.textColor,
                 ),
                 SizedBox(
                   width: 5,
                 ),
                 Text(
-                  feed["likes"]["data"].length.toString() ?? "",
+                  feed["likes"]["data"].length.toString(),
+                  style: TextStyle(
+                    color: config.textColor,
+                  ),
                 ),
               ],
             ),
@@ -34,6 +48,9 @@ class FbNewsFooter extends StatelessWidget {
             .toLocal()
             .toString()
             .substring(0, 16),
+        style: TextStyle(
+          color: config.textColor,
+        ),
       ),
       onTap: () {
         launch(feed["permalink_url"]);

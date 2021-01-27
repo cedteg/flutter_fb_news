@@ -10,8 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 // Project imports:
+import 'package:flutter_fb_news/flutter_fb_news_config.dart';
+import 'fb_news_feed.dart';
 import 'fb_news_service.dart';
-import 'widgets/fb_news_feed.dart';
 
 /// Flutter plugin for displaying Facebook page feed with photos and videos
 class FbNews extends StatefulWidget {
@@ -26,6 +27,9 @@ class FbNews extends StatefulWidget {
   ///
   /// #### DEFAULT = 20
   final int limit;
+
+  /// Subtitle in the every feeditem
+  final String subtitle;
 
   /// The [waiting] widget is displayed when the data is loaded
   ///
@@ -66,36 +70,74 @@ class FbNews extends StatefulWidget {
   /// #### Supported fields are
   /// ```dart
   /// [
-  ///   FbNewsFields.attachments,
+  ///   FbNewsFields.header,
+  ///   FbNewsFields.attachmentsPhotos,
+  ///   FbNewsFields.attachmentsVideos,
   ///   FbNewsFields.message,
+  ///   FbNewsFields.footer,
   /// ];
   /// ```
   ///
   /// #### DEFAULT
   /// ```dart
   /// [
-  ///   FbNewsFields.attachments,
+  ///   FbNewsFields.header,
+  ///   FbNewsFields.attachmentsPhotos,
+  ///   FbNewsFields.attachmentsVideos,
   ///   FbNewsFields.message,
+  ///   FbNewsFields.footer,
   /// ];
   /// ```
   final List<FbNewsFieldName> fields;
 
-  /// Subtitle in the every feeditem
-  final String subtitle;
+  /// Set the Color of the border
+  ///
+  /// #### DEFAULT
+  /// Theme.of(context).accentColor
+  final Color borderColor;
+
+  /// Set the Color of the background
+  ///
+  /// #### DEFAULT
+  /// If this property is null then [CardTheme.color] of [ThemeData.cardTheme]
+  /// is used. If that's null then [ThemeData.cardColor] is used.
+  final Color backgroundColor;
+
+  /// Set the Color of the text
+  final Color textColor;
+
+  // Customize the appearance of the posts
+  final FbNewsConfig config;
 
   FbNews({
     @required this.pageId,
     @required this.accesToken,
     this.limit = 20,
-    this.waiting,
-    this.noDataOrError,
-    this.subtitle = "von Facebook",
-    fields,
-  }) : fields = fields ??
-            [
-              FbNewsFields.attachments,
-              FbNewsFields.message,
-            ];
+    config,
+    @Deprecated("use [FbNewsConfig(fields)]") this.waiting,
+    @Deprecated("use [FbNewsConfig(fields)]") this.noDataOrError,
+    @Deprecated("use [FbNewsConfig(fields)]") this.subtitle,
+    @Deprecated("use [FbNewsConfig(fields)]") this.fields,
+    @Deprecated("use [FbNewsConfig(fields)]") this.borderColor,
+    @Deprecated("use [FbNewsConfig(fields)]") this.backgroundColor,
+    @Deprecated("use [FbNewsConfig(fields)]") this.textColor,
+  }) : config = FbNewsConfig(
+          waiting: waiting,
+          noDataOrError: noDataOrError,
+          subtitle: subtitle ?? "von Facebook",
+          fields: fields ??
+              [
+                FbNewsFields.header,
+                FbNewsFields.attachmentsPhotos,
+                FbNewsFields.attachmentsVideos,
+                FbNewsFields.message,
+                FbNewsFields.footer,
+              ],
+          borderColor: borderColor,
+          showBorder: false,
+          backgroundColor: backgroundColor,
+          textColor: textColor,
+        );
   @override
   _FbNewsState createState() => _FbNewsState();
 }
@@ -111,7 +153,7 @@ class _FbNewsState extends State<FbNews> {
       builder: (context, snapshot1) {
         switch (snapshot1.connectionState) {
           case ConnectionState.waiting:
-            return widget.waiting ??
+            return widget.config.waiting ??
                 Column(
                   children: [
                     CircularProgressIndicator(),
@@ -121,94 +163,133 @@ class _FbNewsState extends State<FbNews> {
                   ],
                 );
           default:
-            if (!snapshot1.hasData ||
-                snapshot1.hasError ||
-                snapshot1.data.body.contains(
-                  "Exception",
-                ))
-              return widget.noDataOrError ??
-                  Card(
-                    color: Colors.red,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          snapshot1.error ?? snapshot1.data.body,
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        )
-                      ],
+            return hasErrors(snapshot1)
+                ? widget.config.noDataOrError ??
+                    Card(
+                      color: Colors.red,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            snapshot1.error ?? snapshot1.data.body,
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                : new FutureBuilder<http.Response>(
+                    future: FbNewsService.getFeed(
+                      pageId: widget.pageId,
+                      token: widget.accesToken,
+                      limit: widget.limit,
+                      fields: widget.config.fields,
                     ),
-                  );
-            else
-              return new FutureBuilder<http.Response>(
-                future: FbNewsService.getFeed(
-                  pageId: widget.pageId,
-                  token: widget.accesToken,
-                  limit: widget.limit,
-                  fields: widget.fields,
-                ),
-                builder: (context, snapshot2) {
-                  switch (snapshot2.connectionState) {
-                    case ConnectionState.waiting:
-                      return widget.waiting ??
-                          Column(
-                            children: [
-                              CircularProgressIndicator(),
-                              SizedBox(
-                                height: 10,
-                              )
-                            ],
-                          );
-                    default:
-                      if (!snapshot2.hasData ||
-                          snapshot2.hasError ||
-                          snapshot2.data.body.contains(
-                            "Exception",
-                          ))
-                        return widget.noDataOrError ??
-                            Card(
-                              color: Colors.red,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                    builder: (context, snapshot2) {
+                      switch (snapshot2.connectionState) {
+                        case ConnectionState.waiting:
+                          return widget.config.waiting ??
+                              Column(
                                 children: [
-                                  Text(
-                                    snapshot2.error ?? snapshot2.data.body,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
+                                  CircularProgressIndicator(),
+                                  SizedBox(
+                                    height: 10,
                                   )
                                 ],
-                              ),
-                            );
-                      else
-                        return FbNewsFeed(
-                          feedResponse: snapshot2.data.body,
-                          profilePictureUrl:
-                              jsonDecode(snapshot1.data.body)["picture"]["data"]
-                                      ["url"]
-                                  .toString(),
-                          subtitle: widget.subtitle,
-                        );
-                  }
-                },
-              );
+                              );
+                        default:
+                          return hasErrors(snapshot2)
+                              ? widget.config.noDataOrError ??
+                                  Card(
+                                    color: Colors.red,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          snapshot2.error ??
+                                              snapshot2.data.body,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                              : FbNewsFeed(
+                                  feedResponse: snapshot2.data.body,
+                                  profilePictureUrl:
+                                      jsonDecode(snapshot1.data.body)["picture"]
+                                              ["data"]["url"]
+                                          .toString(),
+                                  config: widget.config,
+                                );
+                      }
+                    },
+                  );
         }
       },
     );
   }
+
+  bool hasErrors(AsyncSnapshot<http.Response> snapshot) {
+    return (!snapshot.hasData ||
+        snapshot.hasError ||
+        snapshot.data.body.contains(
+          "Exception",
+        ));
+  }
 }
 
 class FbNewsFields {
-  static final FbNewsFieldName attachments = FbNewsFieldName("attachments");
-  static final FbNewsFieldName message = FbNewsFieldName("message");
+  @Deprecated(
+    "use [attachmentsVideos] or [attachmentsPhotos]",
+  )
+  static final FbNewsFieldName attachments = FbNewsFieldName(
+    "attachments",
+    "attachments",
+  );
+
+  /// Enables the display of videos
+  static final FbNewsFieldName attachmentsVideos = FbNewsFieldName(
+    "attachments",
+    "attachments_videos",
+  );
+
+  /// Enables the display of photos
+  static final FbNewsFieldName attachmentsPhotos = FbNewsFieldName(
+    "attachments",
+    "attachments_photos",
+  );
+
+  /// Enables the display of messages
+  static final FbNewsFieldName message = FbNewsFieldName(
+    "message",
+    "message",
+  );
+
+  /// Enables the display of headers
+  static final FbNewsFieldName header = FbNewsFieldName(
+    "message",
+    "header",
+  );
+
+  /// Enables the display of footers
+  static final FbNewsFieldName footer = FbNewsFieldName(
+    "likes{id}",
+    "footer",
+  );
 }
 
 class FbNewsFieldName {
-  final String name;
+  /// Internal use to retrieve from the Facebook Api
+  final String facebookKey;
 
+  /// Internal use for handling internal widgets
+  final String internalKey;
   FbNewsFieldName(
-    this.name,
+    this.facebookKey,
+    this.internalKey,
   );
 }

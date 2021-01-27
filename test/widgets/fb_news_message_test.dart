@@ -2,7 +2,8 @@
 import 'package:flutter_test/flutter_test.dart';
 
 // Project imports:
-import 'package:flutter_fb_news/widgets/fb_news_message.dart';
+import 'package:flutter_fb_news/fb_news_message.dart';
+import 'package:flutter_fb_news/flutter_fb_news_config.dart';
 import '../TestMaterialWidget.dart';
 
 void main() {
@@ -15,6 +16,7 @@ void main() {
       TestMaterialWidget(
         child: FbNewsMessage(
           feed: feed,
+          config: FbNewsConfig(),
         ),
       ),
     );
@@ -33,6 +35,7 @@ void main() {
       TestMaterialWidget(
         child: FbNewsMessage(
           feed: feed,
+          config: FbNewsConfig(),
         ),
       ),
     );
