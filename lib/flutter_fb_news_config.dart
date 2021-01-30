@@ -89,6 +89,9 @@ class FbNewsConfig {
   /// Set the Color of the text
   final Color textColor;
 
+  /// Set the Color of a link
+  final Color linkColor;
+
   FbNewsConfig({
     this.subtitle = "von Facebook",
     this.waiting,
@@ -98,6 +101,7 @@ class FbNewsConfig {
     this.showBorder = true,
     this.backgroundColor,
     this.textColor,
+    this.linkColor,
   }) : fields = [
           FbNewsFields.header,
           FbNewsFields.attachmentsPhotos,

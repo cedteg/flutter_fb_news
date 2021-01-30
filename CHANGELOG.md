@@ -1,6 +1,7 @@
 ## [1.1.1] - 2021.01.30
 * `config` was always overwritten
 * `showBorder` is now turned on by default
+* add `linkColor` to FbNewsConfig 
 ## [1.1.0] - 2021.01.27
 * add `FbNewsConfig` config
 * **DEPRECATED:** `waiting` use `FbNewsConfig(waiting)`
