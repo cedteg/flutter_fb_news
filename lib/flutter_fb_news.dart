@@ -121,23 +121,24 @@ class FbNews extends StatefulWidget {
     @Deprecated("use [FbNewsConfig(fields)]") this.borderColor,
     @Deprecated("use [FbNewsConfig(fields)]") this.backgroundColor,
     @Deprecated("use [FbNewsConfig(fields)]") this.textColor,
-  }) : config = FbNewsConfig(
-          waiting: waiting,
-          noDataOrError: noDataOrError,
-          subtitle: subtitle ?? "von Facebook",
-          fields: fields ??
-              [
-                FbNewsFields.header,
-                FbNewsFields.attachmentsPhotos,
-                FbNewsFields.attachmentsVideos,
-                FbNewsFields.message,
-                FbNewsFields.footer,
-              ],
-          borderColor: borderColor,
-          showBorder: false,
-          backgroundColor: backgroundColor,
-          textColor: textColor,
-        );
+  }) : config = config ??
+            FbNewsConfig(
+              waiting: waiting,
+              noDataOrError: noDataOrError,
+              subtitle: subtitle ?? "von Facebook",
+              fields: fields ??
+                  [
+                    FbNewsFields.header,
+                    FbNewsFields.attachmentsPhotos,
+                    FbNewsFields.attachmentsVideos,
+                    FbNewsFields.message,
+                    FbNewsFields.footer,
+                  ],
+              borderColor: borderColor,
+              showBorder: true,
+              backgroundColor: backgroundColor,
+              textColor: textColor,
+            );
   @override
   _FbNewsState createState() => _FbNewsState();
 }

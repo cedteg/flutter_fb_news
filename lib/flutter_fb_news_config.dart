@@ -89,14 +89,24 @@ class FbNewsConfig {
   /// Set the Color of the text
   final Color textColor;
 
+  /// Set the Color of a link
+  final Color linkColor;
+
   FbNewsConfig({
     this.subtitle = "von Facebook",
     this.waiting,
     this.noDataOrError,
-    this.fields,
+    fields,
     this.borderColor,
     this.showBorder = true,
     this.backgroundColor,
     this.textColor,
-  });
+    this.linkColor,
+  }) : fields = [
+          FbNewsFields.header,
+          FbNewsFields.attachmentsPhotos,
+          FbNewsFields.attachmentsVideos,
+          FbNewsFields.message,
+          FbNewsFields.footer,
+        ];
 }

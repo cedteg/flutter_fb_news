@@ -3,6 +3,8 @@ import 'dart:convert';
 
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // Project imports:
 import 'flutter_fb_news_config.dart';
@@ -26,10 +28,18 @@ class FbNewsMessage extends StatelessWidget {
     return jsonEncode(feed).contains("message")
         ? Container(
             padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
-            child: Text(
-              feed["message"],
+            child: Linkify(
+              onOpen: (link) {
+                launch(
+                  link.url,
+                );
+              },
+              text: feed["message"],
               style: TextStyle(
                 color: config.textColor,
+              ),
+              linkStyle: TextStyle(
+                color: config.linkColor,
               ),
             ),
           )

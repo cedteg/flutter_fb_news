@@ -8,27 +8,6 @@ import '../TestMaterialWidget.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  testWidgets("FbNewsMessage with text", (WidgetTester tester) async {
-    Map<String, dynamic> feed = {
-      "message": "random text",
-    };
-    await tester.pumpWidget(
-      TestMaterialWidget(
-        child: FbNewsMessage(
-          feed: feed,
-          config: FbNewsConfig(),
-        ),
-      ),
-    );
-    expect(
-      find.text(feed["message"]),
-      findsOneWidget,
-    );
-    expect(
-      find.widgetWithText(TestMaterialWidget, feed["message"]),
-      findsOneWidget,
-    );
-  });
   testWidgets("FbNewsMessage without text", (WidgetTester tester) async {
     Map<String, dynamic> feed = {};
     await tester.pumpWidget(
