@@ -87,57 +87,54 @@ class FbNewsFeedLayout extends StatelessWidget {
       padding: EdgeInsets.all(10),
       child: Card(
         color: config.backgroundColor,
-        child: Container(
-          width: 430,
-          child: Column(
-            children: [
-              hasField(
-                FbNewsFields.header.internalKey,
-              )
-                  ? FbNewsHeader(
-                      feed: feed,
-                      profilePictureUrl: profilePictureUrl,
-                      config: config,
+        child: Column(
+          children: [
+            hasField(
+              FbNewsFields.header.internalKey,
+            )
+                ? FbNewsHeader(
+                    feed: feed,
+                    profilePictureUrl: profilePictureUrl,
+                    config: config,
+                  )
+                : Container(),
+            hasField(
+              FbNewsFields.message.internalKey,
+            )
+                ? FbNewsMessage(
+                    feed: feed,
+                    config: config,
+                  )
+                : Container(),
+            hasField(
+                      "attachments",
+                    ) ||
+                    hasField(
+                      FbNewsFields.attachmentsPhotos.internalKey,
                     )
-                  : Container(),
-              hasField(
-                FbNewsFields.message.internalKey,
-              )
-                  ? FbNewsMessage(
-                      feed: feed,
-                      config: config,
+                ? FbNewsAttachmentsPhotos(
+                    feed: feed,
+                  )
+                : Container(),
+            hasField(
+                      "attachments",
+                    ) ||
+                    hasField(
+                      FbNewsFields.attachmentsVideos.internalKey,
                     )
-                  : Container(),
-              hasField(
-                        "attachments",
-                      ) ||
-                      hasField(
-                        FbNewsFields.attachmentsPhotos.internalKey,
-                      )
-                  ? FbNewsAttachmentsPhotos(
-                      feed: feed,
-                    )
-                  : Container(),
-              hasField(
-                        "attachments",
-                      ) ||
-                      hasField(
-                        FbNewsFields.attachmentsVideos.internalKey,
-                      )
-                  ? FbNewsAttachmentsVideos(
-                      feed: feed,
-                    )
-                  : Container(),
-              hasField(
-                FbNewsFields.footer.internalKey,
-              )
-                  ? FbNewsFooter(
-                      feed: feed,
-                      config: config,
-                    )
-                  : Container(),
-            ],
-          ),
+                ? FbNewsAttachmentsVideos(
+                    feed: feed,
+                  )
+                : Container(),
+            hasField(
+              FbNewsFields.footer.internalKey,
+            )
+                ? FbNewsFooter(
+                    feed: feed,
+                    config: config,
+                  )
+                : Container(),
+          ],
         ),
       ),
     );

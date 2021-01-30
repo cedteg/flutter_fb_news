@@ -93,10 +93,16 @@ class FbNewsConfig {
     this.subtitle = "von Facebook",
     this.waiting,
     this.noDataOrError,
-    this.fields,
+    fields,
     this.borderColor,
     this.showBorder = true,
     this.backgroundColor,
     this.textColor,
-  });
+  }) : fields = [
+          FbNewsFields.header,
+          FbNewsFields.attachmentsPhotos,
+          FbNewsFields.attachmentsVideos,
+          FbNewsFields.message,
+          FbNewsFields.footer,
+        ];
 }

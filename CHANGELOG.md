@@ -1,3 +1,6 @@
+## [1.1.1] - 2021.01.30
+* `config` was always overwritten
+* `showBorder` is now turned on by default
 ## [1.1.0] - 2021.01.27
 * add `FbNewsConfig` config
 * **DEPRECATED:** `waiting` use `FbNewsConfig(waiting)`
