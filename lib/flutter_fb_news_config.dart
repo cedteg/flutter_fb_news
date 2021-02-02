@@ -45,7 +45,8 @@ class FbNewsConfig {
   /// ```
   final Widget noDataOrError;
 
-  /// #### Supported fields are
+  /// #### Select which fields to display
+  /// Supported fields are
   /// ```dart
   /// [
   ///   FbNewsFields.header,

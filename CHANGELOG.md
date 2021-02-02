@@ -1,3 +1,6 @@
+## [1.1.2+1] - 2021.02.02
+* update Docu
+## [1.1.2] - 2021.02.02
 ## [1.1.1] - 2021.01.30
 * `config` was always overwritten
 * `showBorder` is now turned on by default
