@@ -71,7 +71,7 @@ Center(
 # Parameters
 
 | Parameter | Type  | Required | Description |
-| ---- | ---- | ---- | ---- | ---- |
+| ---- | ---- | ---- | ---- | 
 | `pageId` | String  | yes | is required to identify the Facebook page, for example (253146702201895)| 
 | `accesToken` | String  | yes |is required to authorize for the Facebook Api Docu to get the authToken https://developers.facebook.com/docs/facebook-login/access-tokens#pagetokens| 
 | `limit` | int  | no | Limits the number of elements that are loaded Default: 20| 
