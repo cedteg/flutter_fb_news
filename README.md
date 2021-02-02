@@ -2,19 +2,51 @@
 
 Flutter plugin for displaying Facebook page feed with photos and videos
 
+[![platform](https://img.shields.io/badge/Platform-Flutter-blue.svg)](https://flutter.dev/)
 [![pub](https://img.shields.io/pub/v/flutter_fb_news.svg)](https://pub.dev/packages/flutter_fb_news)
+[![donate](https://img.shields.io/badge/Donate-Buy%20me%20a%20coffe-yellow.svg)](https://www.buymeacoffee.com/cedtegapps)
 
+# Getting Started
+You should ensure that you add the `flutter_fb_news` as a dependency in your flutter project.
+```
+dependencies:
+  flutter_fb_news: '^1.1.1'
+```
 
+You should then run `flutter packages get` in your terminal so as to get the package.
 # Using
 ```dart
 import 'package:flutter_fb_news/flutter_fb_news.dart';
 
 Center(
     child: FbNews(
-        accesToken:"xyz", // Your Page AccesToken
-        pageId: "123567890", // Your PageId
+        accesToken:"xyz",
+        pageId: "123567890",
         limit: 25,
         config: FbNewsConfig(
+            subtitle = "from Facebook",
+            waiting: Column(
+                children: [
+                    CircularProgressIndicator(),
+                    SizedBox(
+                        height: 10,
+                    )
+                ],
+            ),
+            noDataOrError: Card(
+                color: Colors.red,
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                        Text(
+                            snapshot.error.toString(),
+                            style: TextStyle(
+                                color: Colors.white,
+                            ),
+                        )
+                    ],
+                ),
+            ),
             fields: [
                 FbNewsFields.header,
                 FbNewsFields.attachmentsPhotos,
@@ -23,8 +55,10 @@ Center(
                 FbNewsFields.footer,
             ],
             borderColor: Colors.black,
+            showBorder = true,
             backgroundColor: Colors.white,
             textColor: Colors.black,
+            linkColor: Colors.blue,
         ),
     ),
 ),
