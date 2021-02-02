@@ -77,7 +77,6 @@ Center(
 | `limit` | int  | no | Limits the number of elements that are loaded Default: 20| 
 | `config` | FbNewsConfig | no | Customize the appearance of the posts| 
 
-
 ## FbNewsConfig Params
 
 | Parameter | Type  | Required | Description |
@@ -91,3 +90,11 @@ Center(
 | `backgroundColor` | Color  | no |  Set the Color of the background | 
 | `textColor` | Color  | no | Set the Color of the text | 
 | `linkColor` | Color  | no | Set the Color of a link | 
+
+## FbNewsFieldName
+The possible filds are 
+  - `FbNewsFields.header`
+  - `FbNewsFields.attachmentsPhotos`
+  - `FbNewsFields.attachmentsVideos`
+  - `FbNewsFields.message`
+  - `FbNewsFields.footer`
