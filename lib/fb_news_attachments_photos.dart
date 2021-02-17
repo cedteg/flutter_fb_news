@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 // Flutter imports:
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -55,8 +56,10 @@ class _FbNewsAttachmentsPhotosState extends State<FbNewsAttachmentsPhotos> {
                   ),
                   items: images
                       .map((i) {
-                        return Image.network(
-                          i["media"]["image"]["src"] ?? "",
+                        return CachedNetworkImage(
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(),
+                          imageUrl: i["media"]["image"]["src"] ?? "",
                         );
                       })
                       .cast<Widget>()
@@ -65,8 +68,10 @@ class _FbNewsAttachmentsPhotosState extends State<FbNewsAttachmentsPhotos> {
               : Wrap(
                   children: images
                       .map((i) {
-                        return Image.network(
-                          i["media"]["image"]["src"] ?? "",
+                        return CachedNetworkImage(
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(),
+                          imageUrl: i["media"]["image"]["src"] ?? "",
                         );
                       })
                       .cast<Widget>()
