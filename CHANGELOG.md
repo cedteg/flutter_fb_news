@@ -1,7 +1,5 @@
-## [1.1.3-dev.2] - 2021.02.12
+## [1.1.3] - 2021.02.17
 * cache Image Content
-## [1.1.3-dev.1] - 2021.02.03
-* update pub flutter_linkify, carousel_slider 
 ## [1.1.2+1] - 2021.02.02
 * update Docu
 ## [1.1.2] - 2021.02.02
