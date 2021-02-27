@@ -1,4 +1,4 @@
-## [1.1.4-dev.0] - 2021.02.28
+## [1.1.4-dev.1] - 2021.02.28
 * add `FbNewsFields.attachmentsVideoDirectResponseAutoplay`
 * add `FbNewsFields.attachmentsShare`
 * **REMOVED:** `waiting` use `FbNewsConfig(waiting)`
