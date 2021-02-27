@@ -29,7 +29,7 @@ class _FbNewsAttachmentsVideosState extends State<FbNewsAttachmentsVideos> {
       if (!jsonEncode(widget.feed).contains("subattachments")) {
         var attachments = widget.feed["attachments"]["data"];
         for (var attachment in attachments) {
-          if (attachment["type"].contains("video")) {
+          if (attachment["type"] == "video_autoplay") {
             videos.add(attachment);
           }
         }
@@ -38,7 +38,7 @@ class _FbNewsAttachmentsVideosState extends State<FbNewsAttachmentsVideos> {
             widget.feed["attachments"]["data"][0]["subattachments"]["data"];
 
         for (var attachment in subattachments) {
-          if (attachment["type"].contains("video")) {
+          if (attachment["type"] == "video_autoplay") {
             videos.add(attachment);
           }
         }

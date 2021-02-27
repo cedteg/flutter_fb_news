@@ -35,8 +35,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Scrollbar(
           child: SingleChildScrollView(
             child: FbNews(
-              accesToken: "xyz",
-              pageId: "1234567890",
+              accesToken:
+                  "EAAEv8mmmPuQBAOrgI8sXDn0sZC7FdMZBzZBHCoETsnAs5aW59tBVg9YNzTiZAcroymSoauspyJ0QFl21z61fKaCERpMNu1itCvJPPyuZAUhX7GJzQsiyE69QPvxZCFnSBX0gnJGojHZCU8ZAviY2yAdzCVJfAfGUkT40aDbwRlK1uxjBZAiJuQSBhB6f4Wf9uHccZD",
+              pageId: "100877422026798",
               limit: 25,
               config: FbNewsConfig(
                 borderColor: Colors.black,

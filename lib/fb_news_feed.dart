@@ -3,6 +3,8 @@ import 'dart:convert';
 
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:flutter_fb_news/fb_news_attachments_share.dart';
+import 'package:flutter_fb_news/fb_news_attachments_video_direct_response_autoplay.dart';
 
 // Project imports:
 import 'fb_news_attachments_photos.dart';
@@ -107,22 +109,30 @@ class FbNewsFeedLayout extends StatelessWidget {
                   )
                 : Container(),
             hasField(
-                      "attachments",
-                    ) ||
-                    hasField(
-                      FbNewsFields.attachmentsPhotos.internalKey,
-                    )
+              FbNewsFields.attachmentsPhotos.internalKey,
+            )
                 ? FbNewsAttachmentsPhotos(
                     feed: feed,
                   )
                 : Container(),
             hasField(
-                      "attachments",
-                    ) ||
-                    hasField(
-                      FbNewsFields.attachmentsVideos.internalKey,
-                    )
+              FbNewsFields.attachmentsVideos.internalKey,
+            )
                 ? FbNewsAttachmentsVideos(
+                    feed: feed,
+                  )
+                : Container(),
+            hasField(
+              FbNewsFields.attachmentsShare.internalKey,
+            )
+                ? FbNewsAttachmentsShares(
+                    feed: feed,
+                  )
+                : Container(),
+            hasField(
+              FbNewsFields.attachmentsVideoDirectResponseAutoplay.internalKey,
+            )
+                ? FbNewsAttachmentsVideoDirectResponseAutoplay(
                     feed: feed,
                   )
                 : Container(),

@@ -10,7 +10,7 @@ Flutter plugin for displaying Facebook page feed with photos and videos
 You should ensure that you add the `flutter_fb_news` as a dependency in your flutter project.
 ```
 dependencies:
-  flutter_fb_news: '^1.1.3-dev.2'
+  flutter_fb_news: '^1.1.4-dev.0'
 ```
 
 You should then run `flutter packages get` in your terminal so as to get the package.
@@ -52,6 +52,8 @@ Center(
                 FbNewsFields.header,
                 FbNewsFields.attachmentsPhotos,
                 FbNewsFields.attachmentsVideos,
+                FbNewsFields.attachmentsVideoDirectResponseAutoplay,
+                FbNewsFields.attachmentsShare,
                 FbNewsFields.message,
                 FbNewsFields.footer,
             ],
@@ -92,9 +94,11 @@ Center(
 | `linkColor` | Color  | no | Set the Color of a link | 
 
 ## FbNewsFieldName
-The possible filds are 
+The possible fields are 
   - `FbNewsFields.header`
   - `FbNewsFields.attachmentsPhotos`
   - `FbNewsFields.attachmentsVideos`
+  - `FbNewsFields.attachmentsVideoDirectResponseAutoplay`
+  - `FbNewsFields.attachmentsShare`
   - `FbNewsFields.message`
   - `FbNewsFields.footer`
