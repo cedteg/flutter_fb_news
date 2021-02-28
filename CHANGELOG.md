@@ -1,3 +1,6 @@
+## [1.1.4-dev.2] - 2021.02.28
+* fix display issues on `FbNewsFields.attachmentsVideoDirectResponseAutoplay` and `FbNewsFields.attachmentsVideo`
+* downgrade dependencies from nullsafety
 ## [1.1.4-dev.1] - 2021.02.28
 * add `FbNewsFields.attachmentsVideoDirectResponseAutoplay`
 * add `FbNewsFields.attachmentsShare`

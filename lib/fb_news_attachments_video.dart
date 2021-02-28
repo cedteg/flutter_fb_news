@@ -53,7 +53,7 @@ class _FbNewsAttachmentsVideoState extends State<FbNewsAttachmentsVideo> {
           ? _chewieController.videoPlayerController.value.size.height
           : null,
       child: _chewieController != null &&
-              _chewieController.videoPlayerController.value.isInitialized
+              _chewieController.videoPlayerController.value.initialized
           ? Chewie(
               controller: _chewieController,
             )

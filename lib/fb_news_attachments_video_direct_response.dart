@@ -11,21 +11,21 @@ import 'package:url_launcher/url_launcher.dart';
 import 'fb_news_attachments_video.dart';
 
 /// Only for internal use of flutter_fb_news
-class FbNewsAttachmentsVideoDirectResponseAutoplay extends StatefulWidget {
+class FbNewsAttachmentsVideoDirectResponse extends StatefulWidget {
   /// Only for internal use of flutter_fb_news
   final Map<String, dynamic> feed;
 
-  const FbNewsAttachmentsVideoDirectResponseAutoplay({
+  const FbNewsAttachmentsVideoDirectResponse({
     @required this.feed,
   });
 
   @override
-  _FbNewsAttachmentsVideoDirectResponseAutoplayState createState() =>
-      _FbNewsAttachmentsVideoDirectResponseAutoplayState();
+  _FbNewsAttachmentsVideoDirectResponseState createState() =>
+      _FbNewsAttachmentsVideoDirectResponseState();
 }
 
-class _FbNewsAttachmentsVideoDirectResponseAutoplayState
-    extends State<FbNewsAttachmentsVideoDirectResponseAutoplay> {
+class _FbNewsAttachmentsVideoDirectResponseState
+    extends State<FbNewsAttachmentsVideoDirectResponse> {
   @override
   Widget build(BuildContext context) {
     var _attachment = [];
@@ -33,7 +33,8 @@ class _FbNewsAttachmentsVideoDirectResponseAutoplayState
       if (!jsonEncode(widget.feed).contains("subattachments")) {
         var attachments = widget.feed["attachments"]["data"];
         for (var attachment in attachments) {
-          if (attachment["type"] == "video_direct_response_autoplay") {
+          if (attachment["type"] == "video_direct_response_autoplay" ||
+              attachment["type"] == "video_direct_response") {
             _attachment.add(attachment);
           }
         }
@@ -42,7 +43,8 @@ class _FbNewsAttachmentsVideoDirectResponseAutoplayState
             widget.feed["attachments"]["data"][0]["subattachments"]["data"];
 
         for (var attachment in subattachments) {
-          if (attachment["type"] == ("video_direct_response_autoplay")) {
+          if (attachment["type"] == "video_direct_response_autoplay" ||
+              attachment["type"] == "video_direct_response") {
             _attachment.add(attachment);
           }
         }

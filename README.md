@@ -6,15 +6,6 @@ Flutter plugin for displaying Facebook page feed with photos and videos
 [![pub](https://img.shields.io/pub/v/flutter_fb_news.svg)](https://pub.dev/packages/flutter_fb_news)
 [![donate](https://img.shields.io/badge/Donate-Buy%20me%20a%20coffe-yellow.svg)](https://www.buymeacoffee.com/cedtegapps)
 
-# Getting Started
-You should ensure that you add the `flutter_fb_news` as a dependency in your flutter project.
-```
-dependencies:
-  flutter_fb_news: '^1.1.4-dev.0'
-```
-
-You should then run `flutter packages get` in your terminal so as to get the package.
-
 # Using
 ```dart
 import 'package:flutter_fb_news/flutter_fb_news.dart';

@@ -4,7 +4,7 @@ import 'dart:convert';
 // Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:flutter_fb_news/fb_news_attachments_share.dart';
-import 'package:flutter_fb_news/fb_news_attachments_video_direct_response_autoplay.dart';
+import 'package:flutter_fb_news/fb_news_attachments_video_direct_response.dart';
 
 // Project imports:
 import 'fb_news_attachments_photos.dart';
@@ -76,9 +76,9 @@ class FbNewsFeedLayout extends StatelessWidget {
     @required this.config,
   });
 
-  bool hasField(String internalKey) {
+  bool hasField(FbNewsFieldName key) {
     return config.fields
-        .where((element) => element.internalKey == internalKey)
+        .where((element) => element.internalKey == key.internalKey)
         .isNotEmpty;
   }
 
@@ -92,7 +92,7 @@ class FbNewsFeedLayout extends StatelessWidget {
         child: Column(
           children: [
             hasField(
-              FbNewsFields.header.internalKey,
+              FbNewsFields.header,
             )
                 ? FbNewsHeader(
                     feed: feed,
@@ -101,7 +101,7 @@ class FbNewsFeedLayout extends StatelessWidget {
                   )
                 : Container(),
             hasField(
-              FbNewsFields.message.internalKey,
+              FbNewsFields.message,
             )
                 ? FbNewsMessage(
                     feed: feed,
@@ -109,35 +109,35 @@ class FbNewsFeedLayout extends StatelessWidget {
                   )
                 : Container(),
             hasField(
-              FbNewsFields.attachmentsPhotos.internalKey,
+              FbNewsFields.attachmentsPhotos,
             )
                 ? FbNewsAttachmentsPhotos(
                     feed: feed,
                   )
                 : Container(),
             hasField(
-              FbNewsFields.attachmentsVideos.internalKey,
+              FbNewsFields.attachmentsVideos,
             )
                 ? FbNewsAttachmentsVideos(
                     feed: feed,
                   )
                 : Container(),
             hasField(
-              FbNewsFields.attachmentsShare.internalKey,
+              FbNewsFields.attachmentsShare,
             )
                 ? FbNewsAttachmentsShares(
                     feed: feed,
                   )
                 : Container(),
             hasField(
-              FbNewsFields.attachmentsVideoDirectResponseAutoplay.internalKey,
+              FbNewsFields.attachmentsVideoDirectResponseAutoplay,
             )
-                ? FbNewsAttachmentsVideoDirectResponseAutoplay(
+                ? FbNewsAttachmentsVideoDirectResponse(
                     feed: feed,
                   )
                 : Container(),
             hasField(
-              FbNewsFields.footer.internalKey,
+              FbNewsFields.footer,
             )
                 ? FbNewsFooter(
                     feed: feed,
