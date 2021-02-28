@@ -1,3 +1,5 @@
+## [1.1.4-dev.3] - 2021.02.28
+* update required dart version
 ## [1.1.4-dev.2] - 2021.02.28
 * fix display issues on `FbNewsFields.attachmentsVideoDirectResponseAutoplay` and `FbNewsFields.attachmentsVideo`
 * downgrade dependencies from nullsafety
