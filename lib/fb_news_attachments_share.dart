@@ -5,21 +5,25 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+// Package imports:
+import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 /// Only for internal use of flutter_fb_news
-class FbNewsAttachmentsPhotos extends StatefulWidget {
+class FbNewsAttachmentsShares extends StatefulWidget {
   /// Only for internal use of flutter_fb_news
   final Map<String, dynamic> feed;
 
-  const FbNewsAttachmentsPhotos({
+  const FbNewsAttachmentsShares({
     @required this.feed,
   });
 
   @override
-  _FbNewsAttachmentsPhotosState createState() =>
-      _FbNewsAttachmentsPhotosState();
+  _FbNewsAttachmentsSharesState createState() =>
+      _FbNewsAttachmentsSharesState();
 }
 
-class _FbNewsAttachmentsPhotosState extends State<FbNewsAttachmentsPhotos> {
+class _FbNewsAttachmentsSharesState extends State<FbNewsAttachmentsShares> {
   @override
   Widget build(BuildContext context) {
     var images = [];
@@ -27,7 +31,7 @@ class _FbNewsAttachmentsPhotosState extends State<FbNewsAttachmentsPhotos> {
       if (!jsonEncode(widget.feed).contains("subattachments")) {
         var attachments = widget.feed["attachments"]["data"];
         for (var attachment in attachments) {
-          if (attachment["type"] == "photo") {
+          if (attachment["type"] == "share") {
             images.add(attachment);
           }
         }
@@ -36,7 +40,7 @@ class _FbNewsAttachmentsPhotosState extends State<FbNewsAttachmentsPhotos> {
             widget.feed["attachments"]["data"][0]["subattachments"]["data"];
 
         for (var attachment in subattachments) {
-          if (attachment["type"] == "photo") {
+          if (attachment["type"] == "share") {
             images.add(attachment);
           }
         }
@@ -54,6 +58,26 @@ class _FbNewsAttachmentsPhotosState extends State<FbNewsAttachmentsPhotos> {
                               CircularProgressIndicator(),
                           imageUrl: i["media"]["image"]["src"] ?? "",
                         ),
+                        i["description"] != null || i["title"] != null
+                            ? ListTile(
+                                onTap: () {
+                                  launch(i["url"]);
+                                },
+                                leading: Icon(
+                                  Icons.open_in_browser,
+                                ),
+                                title: i["title"] != null
+                                    ? Text(
+                                        i["title"],
+                                      )
+                                    : null,
+                                subtitle: i["description"] != null
+                                    ? Linkify(
+                                        text: i["description"],
+                                      )
+                                    : null,
+                              )
+                            : Container(),
                       ],
                     );
                   })

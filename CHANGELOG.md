@@ -1,3 +1,20 @@
+## [1.1.4-dev.3] - 2021.02.28
+* update required dart version
+## [1.1.4-dev.2] - 2021.02.28
+* fix display issues on `FbNewsFields.attachmentsVideoDirectResponseAutoplay` and `FbNewsFields.attachmentsVideo`
+* downgrade dependencies from nullsafety
+## [1.1.4-dev.1] - 2021.02.28
+* add `FbNewsFields.attachmentsVideoDirectResponseAutoplay`
+* add `FbNewsFields.attachmentsShare`
+* **REMOVED:** `waiting` use `FbNewsConfig(waiting)`
+* **REMOVED:** `noDataOrError` use `FbNewsConfig(noDataOrError)`
+* **REMOVED:** `subtitle` use `FbNewsConfig(subtitle)`
+* **REMOVED:** `fields` use `FbNewsConfig(fields)`
+* **REMOVED:** `borderColor` use `FbNewsConfig(borderColor)`
+* **REMOVED:** `backgroundColor` use `FbNewsConfig(backgroundColor)`
+* **REMOVED:** `textColor` use `FbNewsConfig(textColor)`
+* **REMOVED:** `attachment` use `attachmentsPhotos` or `attachmentsVideos`
+* Use Facebook API V10.0
 ## [1.1.3] - 2021.02.17
 * cache Image Content
 ## [1.1.2+1] - 2021.02.02

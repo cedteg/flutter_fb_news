@@ -39,8 +39,10 @@ class _FbNewsAttachmentsVideoState extends State<FbNewsAttachmentsVideo> {
       allowFullScreen: false,
       showControls: true,
       customControls: MaterialControls(),
-      autoInitialize: true,
+      autoInitialize: false,
     );
+
+    await _chewieController.videoPlayerController.initialize();
     setState(() {});
   }
 
@@ -59,8 +61,6 @@ class _FbNewsAttachmentsVideoState extends State<FbNewsAttachmentsVideo> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
                 CircularProgressIndicator(),
-                SizedBox(height: 20),
-                Text('Loading...'),
               ],
             ),
     );

@@ -52,6 +52,8 @@ class FbNewsConfig {
   ///   FbNewsFields.header,
   ///   FbNewsFields.attachmentsPhotos,
   ///   FbNewsFields.attachmentsVideos,
+  ///   FbNewsFields.attachmentsVideoDirectResponseAutoplay,
+  ///   FbNewsFields.attachmentsShare,
   ///   FbNewsFields.message,
   ///   FbNewsFields.footer,
   /// ];
@@ -63,6 +65,8 @@ class FbNewsConfig {
   ///   FbNewsFields.header,
   ///   FbNewsFields.attachmentsPhotos,
   ///   FbNewsFields.attachmentsVideos,
+  ///   FbNewsFields.attachmentsVideoDirectResponseAutoplay,
+  ///   FbNewsFields.attachmentsShare,
   ///   FbNewsFields.message,
   ///   FbNewsFields.footer,
   /// ];
@@ -103,11 +107,14 @@ class FbNewsConfig {
     this.backgroundColor,
     this.textColor,
     this.linkColor,
-  }) : fields = [
-          FbNewsFields.header,
-          FbNewsFields.attachmentsPhotos,
-          FbNewsFields.attachmentsVideos,
-          FbNewsFields.message,
-          FbNewsFields.footer,
-        ];
+  }) : fields = fields ??
+            [
+              FbNewsFields.header,
+              FbNewsFields.attachmentsPhotos,
+              FbNewsFields.attachmentsVideos,
+              FbNewsFields.attachmentsVideoDirectResponseAutoplay,
+              FbNewsFields.attachmentsShare,
+              FbNewsFields.message,
+              FbNewsFields.footer,
+            ].cast<FbNewsFieldName>();
 }

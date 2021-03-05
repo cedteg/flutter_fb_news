@@ -15,7 +15,7 @@ class FbNewsService {
   }) async {
     var f = fields.map((e) => e.facebookKey).toSet().toList();
     return await http.get(
-        "https://graph.facebook.com/v9.0/$pageId/feed?fields=id,created_time,from,limit{$limit},shares,permalink_url,${f.join(",")}&access_token=$token");
+        "https://graph.facebook.com/v10.0/$pageId/feed?fields=id,created_time,from,limit{$limit},shares,permalink_url,${f.join(",")}&access_token=$token");
   }
 
   /// Only for internal use of flutter_fb_news
@@ -24,6 +24,6 @@ class FbNewsService {
     String token,
   }) async {
     return await http.get(
-        "https://graph.facebook.com/v9.0/$pageId?fields=picture&access_token=$token");
+        "https://graph.facebook.com/v10.0/$pageId?fields=picture&access_token=$token");
   }
 }
