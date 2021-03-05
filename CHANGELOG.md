@@ -1,9 +1,6 @@
-## [1.1.4-dev.3] - 2021.02.28
-* update required dart version
-## [1.1.4-dev.2] - 2021.02.28
-* fix display issues on `FbNewsFields.attachmentsVideoDirectResponseAutoplay` and `FbNewsFields.attachmentsVideo`
-* downgrade dependencies from nullsafety
-## [1.1.4-dev.1] - 2021.02.28
+
+## [2.0.0-nullsafety] - 2021.03.05
+* migrate to null safety
 * add `FbNewsFields.attachmentsVideoDirectResponseAutoplay`
 * add `FbNewsFields.attachmentsShare`
 * **REMOVED:** `waiting` use `FbNewsConfig(waiting)`

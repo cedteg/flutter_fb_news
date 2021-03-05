@@ -27,9 +27,9 @@ class FbNewsFeed extends StatelessWidget {
   final FbNewsConfig config;
 
   const FbNewsFeed({
-    @required this.feedResponse,
-    @required this.profilePictureUrl,
-    @required this.config,
+    required this.feedResponse,
+    required this.profilePictureUrl,
+    required this.config,
   });
 
   @override
@@ -71,9 +71,9 @@ class FbNewsFeedLayout extends StatelessWidget {
   /// Only for internal use of flutter_fb_news
   final String profilePictureUrl;
   const FbNewsFeedLayout({
-    @required this.feed,
-    @required this.profilePictureUrl,
-    @required this.config,
+    required this.feed,
+    required this.profilePictureUrl,
+    required this.config,
   });
 
   bool hasField(FbNewsFieldName key) {

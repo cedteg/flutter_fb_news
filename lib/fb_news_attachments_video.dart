@@ -11,7 +11,7 @@ class FbNewsAttachmentsVideo extends StatefulWidget {
   final String videourl;
 
   const FbNewsAttachmentsVideo({
-    @required this.videourl,
+    required this.videourl,
   });
 
   @override
@@ -19,8 +19,8 @@ class FbNewsAttachmentsVideo extends StatefulWidget {
 }
 
 class _FbNewsAttachmentsVideoState extends State<FbNewsAttachmentsVideo> {
-  VideoPlayerController _videoPlayerController1;
-  ChewieController _chewieController;
+  late VideoPlayerController _videoPlayerController1;
+  ChewieController? _chewieController;
   @override
   void initState() {
     super.initState();
@@ -42,7 +42,7 @@ class _FbNewsAttachmentsVideoState extends State<FbNewsAttachmentsVideo> {
       autoInitialize: false,
     );
 
-    await _chewieController.videoPlayerController.initialize();
+    await _chewieController!.videoPlayerController.initialize();
     setState(() {});
   }
 
@@ -50,12 +50,12 @@ class _FbNewsAttachmentsVideoState extends State<FbNewsAttachmentsVideo> {
   Widget build(BuildContext context) {
     return Container(
       height: _chewieController != null
-          ? _chewieController.videoPlayerController.value.size.height
+          ? _chewieController!.videoPlayerController.value.size.height
           : null,
       child: _chewieController != null &&
-              _chewieController.videoPlayerController.value.initialized
+              _chewieController!.videoPlayerController.value.isInitialized
           ? Chewie(
-              controller: _chewieController,
+              controller: _chewieController!,
             )
           : Column(
               mainAxisAlignment: MainAxisAlignment.center,

@@ -15,7 +15,7 @@ class FbNewsAttachmentsShares extends StatefulWidget {
   final Map<String, dynamic> feed;
 
   const FbNewsAttachmentsShares({
-    @required this.feed,
+    required this.feed,
   });
 
   @override

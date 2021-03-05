@@ -22,7 +22,7 @@ class FbNewsConfig {
   ///   ],
   /// );
   /// ```
-  final Widget waiting;
+  final Widget? waiting;
 
   /// The [noDataOrError] widget is displayed if the response contains no data or an error
   ///
@@ -43,7 +43,7 @@ class FbNewsConfig {
   ///   ),
   /// );
   /// ```
-  final Widget noDataOrError;
+  final Widget? noDataOrError;
 
   /// #### Select which fields to display
   /// Supported fields are
@@ -77,7 +77,7 @@ class FbNewsConfig {
   ///
   /// #### DEFAULT
   /// Theme.of(context).accentColor
-  final Color borderColor;
+  final Color? borderColor;
 
   /// Toogle the display of the border
   ///
@@ -89,13 +89,13 @@ class FbNewsConfig {
   /// #### DEFAULT
   /// If this property is null then [CardTheme.color] of [ThemeData.cardTheme]
   /// is used. If that's null then [ThemeData.cardColor] is used.
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   /// Set the Color of the text
-  final Color textColor;
+  final Color? textColor;
 
   /// Set the Color of a link
-  final Color linkColor;
+  final Color? linkColor;
 
   FbNewsConfig({
     this.subtitle = "von Facebook",

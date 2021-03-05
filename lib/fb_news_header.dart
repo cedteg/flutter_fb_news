@@ -18,9 +18,9 @@ class FbNewsHeader extends StatelessWidget {
   final FbNewsConfig config;
 
   const FbNewsHeader({
-    @required this.feed,
-    @required this.profilePictureUrl,
-    @required this.config,
+    required this.feed,
+    required this.profilePictureUrl,
+    required this.config,
   });
 
   @override

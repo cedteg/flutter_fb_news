@@ -16,7 +16,7 @@ class FbNewsAttachmentsVideoDirectResponse extends StatefulWidget {
   final Map<String, dynamic> feed;
 
   const FbNewsAttachmentsVideoDirectResponse({
-    @required this.feed,
+    required this.feed,
   });
 
   @override

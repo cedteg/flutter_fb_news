@@ -32,8 +32,8 @@ class FbNews extends StatefulWidget {
   final FbNewsConfig config;
 
   FbNews({
-    @required this.pageId,
-    @required this.accesToken,
+    required this.pageId,
+    required this.accesToken,
     this.limit = 20,
     config,
   }) : config = config ?? FbNewsConfig();
@@ -67,7 +67,7 @@ class _FbNewsState extends State<FbNews> {
                     Card(
                       color: Colors.red,
                       child: Text(
-                        snapshot1.error ?? snapshot1.data.body,
+                        snapshot1.error as String? ?? snapshot1.data!.body,
                         style: TextStyle(
                           color: Colors.white,
                         ),
@@ -102,8 +102,8 @@ class _FbNewsState extends State<FbNews> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          snapshot2.error ??
-                                              snapshot2.data.body,
+                                          snapshot2.error as String? ??
+                                              snapshot2.data!.body,
                                           style: TextStyle(
                                             color: Colors.white,
                                           ),
@@ -112,9 +112,9 @@ class _FbNewsState extends State<FbNews> {
                                     ),
                                   )
                               : FbNewsFeed(
-                                  feedResponse: snapshot2.data.body,
+                                  feedResponse: snapshot2.data!.body,
                                   profilePictureUrl:
-                                      jsonDecode(snapshot1.data.body)["picture"]
+                                      jsonDecode(snapshot1.data!.body)["picture"]
                                               ["data"]["url"]
                                           .toString(),
                                   config: widget.config,
@@ -130,7 +130,7 @@ class _FbNewsState extends State<FbNews> {
   bool hasErrors(AsyncSnapshot<http.Response> snapshot) {
     return (!snapshot.hasData ||
         snapshot.hasError ||
-        snapshot.data.body.contains(
+        snapshot.data!.body.contains(
           "Exception",
         ));
   }
