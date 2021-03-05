@@ -113,10 +113,10 @@ class _FbNewsState extends State<FbNews> {
                                   )
                               : FbNewsFeed(
                                   feedResponse: snapshot2.data!.body,
-                                  profilePictureUrl:
-                                      jsonDecode(snapshot1.data!.body)["picture"]
-                                              ["data"]["url"]
-                                          .toString(),
+                                  profilePictureUrl: jsonDecode(
+                                              snapshot1.data!.body)["picture"]
+                                          ["data"]["url"]
+                                      .toString(),
                                   config: widget.config,
                                 );
                       }

@@ -1,4 +1,6 @@
 
+## [2.0.0-nullsafety.1] - 2021.03.05
+- update package.lock
 ## [2.0.0-nullsafety] - 2021.03.05
 * migrate to null safety
 * add `FbNewsFields.attachmentsVideoDirectResponseAutoplay`
