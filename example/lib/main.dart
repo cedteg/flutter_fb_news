@@ -29,7 +29,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("flutter_fb_news example"),
+        title: Text(
+          "flutter_fb_news example",
+        ),
       ),
       body: Center(
         child: Scrollbar(

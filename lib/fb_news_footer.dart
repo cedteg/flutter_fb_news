@@ -16,8 +16,8 @@ class FbNewsFooter extends StatelessWidget {
   final FbNewsConfig config;
 
   const FbNewsFooter({
-    @required this.feed,
-    this.config,
+    required this.feed,
+    required this.config,
   });
 
   @override

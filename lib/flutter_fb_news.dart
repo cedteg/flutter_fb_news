@@ -28,117 +28,15 @@ class FbNews extends StatefulWidget {
   /// #### DEFAULT = 20
   final int limit;
 
-  /// Subtitle in the every feeditem
-  final String subtitle;
-
-  /// The [waiting] widget is displayed when the data is loaded
-  ///
-  /// #### DEFAULT
-  /// ```dart
-  /// Column(
-  ///   children: [
-  ///       CircularProgressIndicator(),
-  ///       SizedBox(
-  ///           height: 10,
-  ///       )
-  ///   ],
-  /// );
-  /// ```
-  final Widget waiting;
-
-  /// The [noDataOrError] widget is displayed if the response contains no data or an error
-  ///
-  /// #### DEFAULT
-  /// ```dart
-  /// Card(
-  ///   color: Colors.red,
-  ///    child: Row(
-  ///       mainAxisAlignment: MainAxisAlignment.center,
-  ///       children: [
-  ///           Text(
-  ///               snapshot.error.toString(),
-  ///               style: TextStyle(
-  ///                   color: Colors.white,
-  ///               ),
-  ///           )
-  ///       ],
-  ///   ),
-  /// );
-  /// ```
-  final Widget noDataOrError;
-
-  /// #### Supported fields are
-  /// ```dart
-  /// [
-  ///   FbNewsFields.header,
-  ///   FbNewsFields.attachmentsPhotos,
-  ///   FbNewsFields.attachmentsVideos,
-  ///   FbNewsFields.message,
-  ///   FbNewsFields.footer,
-  /// ];
-  /// ```
-  ///
-  /// #### DEFAULT
-  /// ```dart
-  /// [
-  ///   FbNewsFields.header,
-  ///   FbNewsFields.attachmentsPhotos,
-  ///   FbNewsFields.attachmentsVideos,
-  ///   FbNewsFields.message,
-  ///   FbNewsFields.footer,
-  /// ];
-  /// ```
-  final List<FbNewsFieldName> fields;
-
-  /// Set the Color of the border
-  ///
-  /// #### DEFAULT
-  /// Theme.of(context).accentColor
-  final Color borderColor;
-
-  /// Set the Color of the background
-  ///
-  /// #### DEFAULT
-  /// If this property is null then [CardTheme.color] of [ThemeData.cardTheme]
-  /// is used. If that's null then [ThemeData.cardColor] is used.
-  final Color backgroundColor;
-
-  /// Set the Color of the text
-  final Color textColor;
-
   // Customize the appearance of the posts
   final FbNewsConfig config;
 
   FbNews({
-    @required this.pageId,
-    @required this.accesToken,
+    required this.pageId,
+    required this.accesToken,
     this.limit = 20,
     config,
-    @Deprecated("use [FbNewsConfig(fields)]") this.waiting,
-    @Deprecated("use [FbNewsConfig(fields)]") this.noDataOrError,
-    @Deprecated("use [FbNewsConfig(fields)]") this.subtitle,
-    @Deprecated("use [FbNewsConfig(fields)]") this.fields,
-    @Deprecated("use [FbNewsConfig(fields)]") this.borderColor,
-    @Deprecated("use [FbNewsConfig(fields)]") this.backgroundColor,
-    @Deprecated("use [FbNewsConfig(fields)]") this.textColor,
-  }) : config = config ??
-            FbNewsConfig(
-              waiting: waiting,
-              noDataOrError: noDataOrError,
-              subtitle: subtitle ?? "von Facebook",
-              fields: fields ??
-                  [
-                    FbNewsFields.header,
-                    FbNewsFields.attachmentsPhotos,
-                    FbNewsFields.attachmentsVideos,
-                    FbNewsFields.message,
-                    FbNewsFields.footer,
-                  ],
-              borderColor: borderColor,
-              showBorder: true,
-              backgroundColor: backgroundColor,
-              textColor: textColor,
-            );
+  }) : config = config ?? FbNewsConfig();
   @override
   _FbNewsState createState() => _FbNewsState();
 }
@@ -168,16 +66,11 @@ class _FbNewsState extends State<FbNews> {
                 ? widget.config.noDataOrError ??
                     Card(
                       color: Colors.red,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            snapshot1.error ?? snapshot1.data.body,
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          )
-                        ],
+                      child: Text(
+                        snapshot1.error as String? ?? snapshot1.data!.body,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     )
                 : new FutureBuilder<http.Response>(
@@ -209,8 +102,8 @@ class _FbNewsState extends State<FbNews> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          snapshot2.error ??
-                                              snapshot2.data.body,
+                                          snapshot2.error as String? ??
+                                              snapshot2.data!.body,
                                           style: TextStyle(
                                             color: Colors.white,
                                           ),
@@ -219,11 +112,11 @@ class _FbNewsState extends State<FbNews> {
                                     ),
                                   )
                               : FbNewsFeed(
-                                  feedResponse: snapshot2.data.body,
-                                  profilePictureUrl:
-                                      jsonDecode(snapshot1.data.body)["picture"]
-                                              ["data"]["url"]
-                                          .toString(),
+                                  feedResponse: snapshot2.data!.body,
+                                  profilePictureUrl: jsonDecode(
+                                              snapshot1.data!.body)["picture"]
+                                          ["data"]["url"]
+                                      .toString(),
                                   config: widget.config,
                                 );
                       }
@@ -237,7 +130,7 @@ class _FbNewsState extends State<FbNews> {
   bool hasErrors(AsyncSnapshot<http.Response> snapshot) {
     return (!snapshot.hasData ||
         snapshot.hasError ||
-        snapshot.data.body.contains(
+        snapshot.data!.body.contains(
           "Exception",
         ));
   }
@@ -262,6 +155,19 @@ class FbNewsFields {
   static final FbNewsFieldName attachmentsPhotos = FbNewsFieldName(
     "attachments",
     "attachments_photos",
+  );
+
+  /// Enables the display of shares
+  static final FbNewsFieldName attachmentsShare = FbNewsFieldName(
+    "attachments",
+    "attachments_share",
+  );
+
+  /// Enables the display of shares
+  static final FbNewsFieldName attachmentsVideoDirectResponseAutoplay =
+      FbNewsFieldName(
+    "attachments",
+    "attachments_video_direct_response_autoplay",
   );
 
   /// Enables the display of messages

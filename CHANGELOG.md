@@ -1,3 +1,16 @@
+## [2.0.0] - 2021.03.28
+* migrate to null safety
+* add `FbNewsFields.attachmentsVideoDirectResponseAutoplay`
+* add `FbNewsFields.attachmentsShare`
+* **REMOVED:** `waiting` use `FbNewsConfig(waiting)`
+* **REMOVED:** `noDataOrError` use `FbNewsConfig(noDataOrError)`
+* **REMOVED:** `subtitle` use `FbNewsConfig(subtitle)`
+* **REMOVED:** `fields` use `FbNewsConfig(fields)`
+* **REMOVED:** `borderColor` use `FbNewsConfig(borderColor)`
+* **REMOVED:** `backgroundColor` use `FbNewsConfig(backgroundColor)`
+* **REMOVED:** `textColor` use `FbNewsConfig(textColor)`
+* **REMOVED:** `attachment` use `attachmentsPhotos` or `attachmentsVideos`
+* Use Facebook API V10.0
 ## [1.1.3] - 2021.02.17
 * cache Image Content
 ## [1.1.2+1] - 2021.02.02

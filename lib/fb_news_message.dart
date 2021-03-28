@@ -19,8 +19,8 @@ class FbNewsMessage extends StatelessWidget {
 
   /// Only for internal use of flutter_fb_news
   const FbNewsMessage({
-    @required this.feed,
-    this.config,
+    required this.feed,
+    required this.config,
   });
 
   @override
