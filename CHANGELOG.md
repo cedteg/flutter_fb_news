@@ -1,3 +1,5 @@
+## [2.0.1-dev.0] - 2021.05.18
+- updated dependencies
 ## [2.0.0] - 2021.03.28
 * migrate to null safety
 * add `FbNewsFields.attachmentsVideoDirectResponseAutoplay`
