@@ -16,7 +16,7 @@ class FbNewsService {
     var f = fields.map((e) => e.facebookKey).toSet().toList();
     return await http.get(
       Uri.parse(
-          "https://graph.facebook.com/v10.0/$pageId/feed?fields=id,created_time,from,limit{$limit},shares,permalink_url,${f.join(",")}&access_token=$token"),
+          "https://graph.facebook.com/v10.0/$pageId/feed?fields=id,created_time,from,limit={$limit},shares,permalink_url,${f.join(",")}&access_token=$token"),
     );
   }
 
