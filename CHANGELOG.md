@@ -1,6 +1,5 @@
-## [2.0.1-dev.1] - 2021.05.19
-- fix [only 25 are loaded](https://github.com/cedteg/flutter_fb_news/issues/24)
-## [2.0.1-dev.0] - 2021.05.18
+## [2.0.1] - 2021.05.19
+- fix [only 25 feeds are loaded](https://github.com/cedteg/flutter_fb_news/issues/24)
 - updated dependencies
 ## [2.0.0] - 2021.03.28
 * migrate to null safety
