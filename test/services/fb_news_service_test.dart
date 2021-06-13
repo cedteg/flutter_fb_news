@@ -27,6 +27,7 @@ void main() {
       http.Response response = await FbNewsService.getFeed(
         pageId: "1234567890",
         token: "xyz",
+        limit: 20,
         fields: [],
       );
       expect(response.statusCode, 400);
@@ -35,6 +36,7 @@ void main() {
       http.Response response = await FbNewsService.getFeed(
         pageId: "1234567890",
         token: "xyz",
+        limit: 20,
         fields: [],
       );
       expect(response.body.contains('OAuthException'), true);
