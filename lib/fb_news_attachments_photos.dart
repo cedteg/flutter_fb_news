@@ -27,7 +27,8 @@ class _FbNewsAttachmentsPhotosState extends State<FbNewsAttachmentsPhotos> {
       if (!jsonEncode(widget.feed).contains("subattachments")) {
         var attachments = widget.feed["attachments"]["data"];
         for (var attachment in attachments) {
-          if (attachment["type"] == "photo") {
+          if (attachment["type"] == "photo" ||
+              attachment['type'] == "profile_media") {
             images.add(attachment);
           }
         }
@@ -50,8 +51,10 @@ class _FbNewsAttachmentsPhotosState extends State<FbNewsAttachmentsPhotos> {
                     return Column(
                       children: [
                         CachedNetworkImage(
-                          placeholder: (context, url) =>
-                              CircularProgressIndicator(),
+                          progressIndicatorBuilder: (context, s, progress) =>
+                              CircularProgressIndicator(
+                            value: progress.progress,
+                          ),
                           imageUrl: i["media"]["image"]["src"] ?? "",
                         ),
                       ],
