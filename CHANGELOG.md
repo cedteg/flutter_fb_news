@@ -1,3 +1,5 @@
+## [2.0.2] - 2021.06.13
+- fix [only 25 feeds are loaded](https://github.com/cedteg/flutter_fb_news/issues/24)
 ## [2.0.1] - 2021.05.19
 - fix [only 25 feeds are loaded](https://github.com/cedteg/flutter_fb_news/issues/24)
 - add [support for older dependencies](https://github.com/cedteg/flutter_fb_news/issues/26)
